@@ -1,0 +1,9 @@
+{
+  "errors": {
+    "effective_date": "Date must be after today",
+    "requester_name": "Invalid requester!"
+  },
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ]
+}

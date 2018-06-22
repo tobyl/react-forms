@@ -21,6 +21,11 @@ The project has extremely simple goals:
 4. Run with `yarn start`.
 5. Run tests with `yarn test`.
 
+**Note**: Currently the form uses a dummy API to provide fake validation. To use:
+
+1. Install json-server `npm install -g json-server`.
+2. cd into project folder and run `json-server --watch db.json --port 3001`.
+
 ## Outline
 
 The forms rely on two basic premises for most of their functionality:
