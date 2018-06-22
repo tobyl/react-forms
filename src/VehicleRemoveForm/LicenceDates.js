@@ -3,10 +3,11 @@ import moment from 'moment'
 import Fieldset from 'base/Fieldset'
 import LicenceDate from 'base/LicenceDate'
 import Select from 'base/Select'
+import validateLicensing from './validateLicensing'
 
 class LicenceDates extends React.Component {
   state = {
-    dob: moment('1977-08-07'),
+    dob: '1977-08-07',
     t3: false,
     t2: false,
     t1: false,
@@ -39,6 +40,10 @@ class LicenceDates extends React.Component {
     this.setState({ ...fields }, () =>
       this.props.destroy(toDestroy)
     )
+    let t3 = this.props.getValue('t3_date')
+    let t2 = this.props.getValue('t2_date')
+    let t1 = this.props.getValue('t1_date')
+    let validated = validateLicensing(this.state.dob, t3, t2, t1)
   }
 
   render() {
@@ -46,7 +51,7 @@ class LicenceDates extends React.Component {
     return (
       <fieldset>
         <p>
-          <small>dob: {this.state.dob.format('YYYY-MM-DD')}</small>
+          <small>dob: {this.state.dob}</small>
         </p>
         <Select
           name="licence_class"
@@ -54,9 +59,21 @@ class LicenceDates extends React.Component {
           changeCallback={this.datesChange}
           choices={[['g', 'G'], ['g2', 'G2'], ['g1', 'G1']]}
         />
-        {t3 && <LicenceDate name="t3_date" label="T3 Date" />}
-        {t2 && <LicenceDate name="t2_date" label="T2 Date" />}
-        {t1 && <LicenceDate name="t1_date" label="T1 Date" />}
+        {t3 && <LicenceDate
+                  name="t3_date"
+                  label="T3 Date"
+                  changeCallback={this.datesChange}
+                />}
+        {t2 && <LicenceDate
+                  name="t2_date"
+                  label="T2 Date"
+                  changeCallback={this.datesChange}
+                />}
+        {t1 && <LicenceDate
+                  name="t1_date"
+                  label="T1 Date"
+                  changeCallback={this.datesChange}
+                />}
       </fieldset>
     )
   }
