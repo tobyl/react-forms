@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { formContext } from './Form'
-import { labelToSlug } from '../services'
+import { labelToSlug } from 'services'
 
 const Fieldset = (Component) => {
   class WrappedFieldset extends React.Component {

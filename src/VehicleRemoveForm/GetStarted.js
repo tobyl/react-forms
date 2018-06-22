@@ -1,10 +1,10 @@
 import React from 'react'
-import Fieldset from './base/Fieldset'
-import Select from './base/Select'
-import PostalCode from './base/PostalCode'
-import Text from './base/Text'
-import Radio from './base/Radio'
-import Toggle from './base/Toggle'
+import Fieldset from 'base/Fieldset'
+import Select from 'base/Select'
+import PostalCode from 'base/PostalCode'
+import Text from 'base/Text'
+import Radio from 'base/Radio'
+import Toggle from 'base/Toggle'
 
 const pols = [
   { id: '0x0001' },

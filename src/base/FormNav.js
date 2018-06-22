@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Spinner } from '../Spinner'
+import { Spinner } from 'Components/Spinner'
 
 class FormNav extends React.Component {
   state = {

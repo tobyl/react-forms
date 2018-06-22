@@ -1,6 +1,6 @@
 import React from 'react'
-import Fieldset from './base/Fieldset'
-import Text from './base/Text'
+import Fieldset from 'base/Fieldset'
+import Text from 'base/Text'
 
 class VehicleReview extends React.Component {
   render() {

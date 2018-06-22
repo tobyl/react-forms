@@ -1,7 +1,7 @@
 import React from 'react'
-import Fieldset from './base/Fieldset'
-import Text from './base/Text'
-import Select from './base/Select'
+import Fieldset from 'base/Fieldset'
+import Text from 'base/Text'
+import Select from 'base/Select'
 
 class LicenceDates extends React.Component {
   state = {

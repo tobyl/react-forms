@@ -1,5 +1,5 @@
 import React from 'react'
-import { labelToSlug, slugToLabel } from '../services'
+import { labelToSlug, slugToLabel } from './services'
 
 test('labelToSlug accepts dynamically numbered fieldsets', () => {
   expect(labelToSlug('Vehicle1')).toEqual('vehicle1')

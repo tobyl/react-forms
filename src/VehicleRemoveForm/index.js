@@ -1,5 +1,5 @@
 import React from 'react'
-import Form from './base/Form'
+import Form from 'base/Form'
 import GetStarted from './GetStarted'
 import LicenceDates from './LicenceDates'
 import VehicleReview from './VehicleReview'
@@ -14,7 +14,7 @@ const PolicyVehicles = [
   { id: 2, year: '2015', make: 'Honda', model: 'Fit' },
 ]
 
-class VehicleRemove extends React.Component {
+class VehicleRemoveForm extends React.Component {
   render() {
     return (
       <div>
@@ -34,4 +34,4 @@ class VehicleRemove extends React.Component {
   }
 }
 
-export default Form(VehicleRemove)
+export default Form(VehicleRemoveForm)

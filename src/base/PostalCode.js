@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Field from './Field'
-import { validPostalCode } from '../services'
+import { validPostalCode } from 'services'
 
 class PostalCode extends React.Component {
   validatePostalCode = (e) => {

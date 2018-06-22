@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
-import VehicleRemove from './VehicleRemove'
+import VehicleRemoveForm from './VehicleRemoveForm'
 
 class App extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class App extends React.Component {
         <Route exact path="/" render={() =>
           <Link to="/vehicle-add/get-started">Vehicle Remove</Link>
         }/>
-        <VehicleRemove />
+        <VehicleRemoveForm />
       </div>
     )
   }
