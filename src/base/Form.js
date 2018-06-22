@@ -7,7 +7,7 @@ import './forms.css'
 
 export const formContext = React.createContext()
 
-const initialData = {
+const initialData = { // eslint-disable-line no-unused-vars
   vehicle_driver: '02',
   '0x0001': false,
   '0x0002': true,

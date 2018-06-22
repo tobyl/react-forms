@@ -55,3 +55,10 @@ select {
 .field-error {
   color: #FE2712;
 }
+
+.field .select-chevron {
+  position: absolute;
+  top: 12px;
+  right: 0.75rem;
+  pointer-events: none;
+}
