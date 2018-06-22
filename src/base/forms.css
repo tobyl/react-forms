@@ -1,0 +1,57 @@
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Fieldset {
+  width: 60%;
+}
+
+.field > label:not(.ToggleLabel),
+.field > .label,
+.ToggleGroup > span {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+input[type=text],
+input[type=email],
+input[type=date],
+select {
+  appearance: none;
+  border: 1px solid #e1e1e1;
+  background: #fff;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 3px 5px;
+  border-radius: 2px;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 30px;
+  outline: none;
+}
+
+.field {
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+}
+
+.field.active input,
+.field.active select {
+  border-color: #999;
+}
+
+.field.toggle {
+  padding-bottom: 0;
+}
+
+.ToggleGroup {
+  padding-bottom: 1rem;
+}
+
+.field-error {
+  color: #FE2712;
+}

@@ -1,0 +1,81 @@
+.ToggleLabel,
+.RadioLabel {
+  position: relative;
+  display: block;
+  line-height: 34px;
+  padding-left: 40px;
+  margin-bottom: 0.75rem;
+}
+
+.ToggleLabel input,
+.RadioLabel input {
+  position: absolute;
+  opacity: 0;
+}
+
+.ToggleLabel {
+  padding-left: 66px;
+}
+
+.ToggleLabel:before,
+.RadioLabel:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ccc;
+  border-radius: 16px;
+}
+
+.ToggleLabel:before {
+  width: 56px;
+}
+
+.ToggleLabel span,
+.RadioLabel span {
+  display: inline-block;
+  line-height: 30px;
+}
+
+.ToggleLabel:after,
+.RadioLabel:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  background: #ccc;
+  border-radius: 16px;
+}
+
+.RadioLabel:after {
+  transform: scale(0.25);
+  transition: transform 191ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+}
+
+.RadioLabel.checked:after {
+  background: #ccc;
+  transform: scale(1);
+}
+
+.ToggleLabel:after {
+  transition: left 191ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+}
+
+.ToggleLabel.checked:after {
+  left: 32px;
+}
+
+/* active states */
+
+.field.active .RadioLabel.focused:before {
+  border-color: #999;
+}
+
+.field.active .ToggleLabel:before {
+  border-color: #999;
+}
