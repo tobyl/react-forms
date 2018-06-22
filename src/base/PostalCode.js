@@ -4,6 +4,7 @@ import Field from './Field'
 import { validPostalCode } from 'services'
 
 class PostalCode extends React.Component {
+
   validatePostalCode = (e) => {
     this.props.setError(validPostalCode(e.target.value))
     this.props.blur()

@@ -1,11 +1,12 @@
 import React from 'react'
-import moment from 'moment'
 import PropTypes from 'prop-types'
 import Field from './Field'
+import { validLicenceDate } from 'services'
 
 class LicenceDate extends React.Component {
-  state = {
-    date: moment()
+  validateLicenceDate = (e) => {
+    this.props.setError(validLicenceDate(e.target.value))
+    this.props.blur()
   }
 
   dateChange = (value) => {
@@ -14,7 +15,7 @@ class LicenceDate extends React.Component {
   }
 
   render() {
-    const { name, value, error, focus, blur } = this.props
+    const { name, value, error, focus } = this.props
     return (
       <React.Fragment>
         <input
@@ -22,7 +23,7 @@ class LicenceDate extends React.Component {
           value={value}
           onChange={(e) => this.dateChange(e.target.value)}
           onFocus={focus}
-          onBlur={blur}
+          onBlur={this.validateLicenceDate}
           type="text"
         />
         {error && <div className="field-error">{error}</div>}

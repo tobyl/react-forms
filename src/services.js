@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const labelToSlug = (label) => {
   if (label && !label.includes('-')) {
     if (label.match(/[0-9]+/g)) {
@@ -30,6 +32,21 @@ export const validPostalCode = (value) => {
     return ''
   }
   return 'Invalid postal code'
+}
+
+export const validLicenceDate = (value) => {
+  if (moment(value, 'YYYY-MM-DD', true).isValid()) {
+    value = moment(value).startOf('day')
+    let today = moment().startOf('day')
+    let startOfTime = moment().subtract(100, 'years').startOf('day')
+    if (value.isSame(today) || value.isAfter(today)) {
+      return 'Must be before today'
+    }
+    if (value.isBefore(startOfTime)) {
+      return 'Must be within the last 100 years'
+    }
+  }
+  return ''
 }
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))

@@ -32,18 +32,11 @@ const Field = (Component) => {
       })
     }
 
-    focus = (e) => this.setState({
-      touched: true,
-      active: true,
-    })
+    focus = (e) => this.setState({ touched: true, active: true })
 
-    blur = (e) => this.setState({
-      active: false,
-    })
+    blur = (e) => this.setState({ active: false })
 
-    setError = (error) => {
-      this.setState({ error })
-    }
+    setError = (error) => this.setState({ error })
 
     getError = () => {
       if (this.props.errors[this.props.name]) {
