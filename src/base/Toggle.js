@@ -11,20 +11,23 @@ class Toggle extends React.Component {
   }
 
   render() {
-    const { name, toggleLabel, value, focus, blur } = this.props
+    const { name, toggleLabel, value, error, focus, blur } = this.props
     return (
-      <label className={value ? 'ToggleLabel checked' : 'ToggleLabel'} htmlFor={name}>
-        <input
-          id={name}
-          name={name}
-          value={value}
-          checked={value}
-          onChange={this.toggleChange}
-          onFocus={focus}
-          onBlur={blur}
-          type="checkbox"
-        /> <span>{toggleLabel}</span>
-      </label>
+      <React.Fragment>
+        <label className={value ? 'ToggleLabel checked' : 'ToggleLabel'} htmlFor={name}>
+          <input
+            id={name}
+            name={name}
+            value={value}
+            checked={value}
+            onChange={this.toggleChange}
+            onFocus={focus}
+            onBlur={blur}
+            type="checkbox"
+          /> <span>{toggleLabel}</span>
+        </label>
+        {error && <div className="field-error">{error}</div>}
+      </React.Fragment>
     )
   }
 }

@@ -79,3 +79,9 @@
 .field.active .ToggleLabel:before {
   border-color: #999;
 }
+
+/* toggle error */
+
+.field.toggle .field-error {
+  margin-bottom: 0.75rem;
+}

@@ -20,19 +20,18 @@ const Form = (Component) => {
     constructor(props) {
       super(props)
       this.state = {
-        formData: initialData,
+        formData: {}, // initialData,
         errors: {},
       }
       this.routes = []
     }
 
     update = (field, value) => {
-      this.setState({
-        formData: {
-          ...this.state.formData,
-          [field]: value,
-        }
-      }, () => this.clearError(field))
+      let formData = Object.assign(this.state.formData, {})
+      formData[field] = value
+      this.setState({ formData }, () =>
+        this.clearError(field)
+      )
     }
 
     destroy = (field) => {

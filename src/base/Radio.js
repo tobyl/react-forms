@@ -32,7 +32,7 @@ class Radio extends React.Component {
   }
 
   render() {
-    const { value, choices, blur } = this.props
+    const { value, choices, blur, error } = this.props
     return (
       <div className="RadioGroup">
         {choices.map(ch =>
@@ -53,6 +53,7 @@ class Radio extends React.Component {
             /> <span>{ch[1]}</span>
           </label>
         )}
+        {error && <div className="field-error">{error}</div>}
       </div>
     )
   }

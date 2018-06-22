@@ -1,7 +1,8 @@
 {
   "errors": {
-    "effective_date": "Date must be after today",
-    "requester_name": "Invalid requester!"
+    "requester_name": "Invalid requester!",
+    "vehicle_driver": "You cannot choose that driver",
+    "0x0001": "This policy cannot be selected!"
   },
   "posts": [
     { "id": 1, "title": "json-server", "author": "typicode" }

@@ -1,22 +1,32 @@
 import React from 'react'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 import Field from './Field'
 
 class LicenceDate extends React.Component {
+  state = {
+    date: moment()
+  }
 
-  dateChange = (e) => {
+  dateChange = (value) => {
+    let e = { target: { value } }
     this.props.change(e)
   }
 
   render() {
-    const { name, value } = this.props
+    const { name, value, error, focus, blur } = this.props
     return (
-      <input
-        name={name}
-        value={value}
-        onChange={dateChange}
-        type="date"
-      />
+      <React.Fragment>
+        <input
+          name={name}
+          value={value}
+          onChange={(e) => this.dateChange(e.target.value)}
+          onFocus={focus}
+          onBlur={blur}
+          type="text"
+        />
+        {error && <div className="field-error">{error}</div>}
+      </React.Fragment>
     )
   }
 }
