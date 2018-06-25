@@ -2,7 +2,7 @@ import React from 'react'
 import Fieldset from 'base/Fieldset'
 import LicenceDate from 'base/LicenceDate'
 import Select from 'base/Select'
-import { LicenceGroup } from './validateLicensing'
+import LicenceGroup from './validateLicensing'
 
 class LicenceDates extends React.Component {
   state = {
@@ -19,12 +19,14 @@ class LicenceDates extends React.Component {
     this.datesChange(licence)
   }
 
-  datesChange = (value) => {
+  datesChange = () => {
     let { dob, province, oop } = this.state
+    let licence = this.props.getValue('licence_class')
     let t3 = this.props.getValue('t3_date')
     let t2 = this.props.getValue('t2_date')
     let t1 = this.props.getValue('t1_date')
-    let g = new LicenceGroup(dob, province, oop, value, t3, t2, t1)
+
+    let g = new LicenceGroup(dob, province, oop, licence, t3, t2, t1)
 
     //  visible: {
     //    t3: boolean,
@@ -47,7 +49,9 @@ class LicenceDates extends React.Component {
 
     this.setState({
       ...this.state,
-      ...g.visibleFields(),
+      t3: g.visible().t3,
+      t2: g.visible().t2,
+      t1: g.visible().t1,
     }, () =>
       this.props.destroy(g.toDestroy()),
       this.props.setErrors(g.fieldErrors())

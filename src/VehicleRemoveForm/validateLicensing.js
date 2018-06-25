@@ -1,74 +1,97 @@
 import moment from 'moment'
+import { validDate, afterToday } from 'dateServices'
 
-class NonGdlLicence {
-
-}
-
-class GdlLicence {
-
-}
-
-export class LicenceGroup {
-  constructor(dob, licence, t3, t2, t1) {
-    this.dob = moment(dob).startOf('day')
+class WithGdl {
+  constructor(dob, province, oop, licence, t3, t2, t1) {
+    this.dob = dob
+    this.province = province
+    this.oop = oop
     this.licence = licence
-    this.t3 = moment(t3, 'YYYY-MM-DD', true).startOf('day')
-    this.t2 = moment(t2, 'YYYY-MM-DD', true).startOf('day')
-    this.t1 = moment(t1, 'YYYY-MM-DD', true).startOf('day')
+    this.errors = {
+      t3: '',
+      t2: '',
+      t1: '',
+    }
+  }
+}
 
+class LicenceGroup {
+  constructor(dob, province, oop, licence, t3, t2, t1) {
+
+    // setup
+    this.dob = moment(dob).startOf('day')
+    this.province = province
+    this.oop = oop
+    this.licence = licence
+
+    // fixed gdl date
     this.gdlDate = moment('1994-04-01').startOf('day')
+
+    this.t3 = validDate(t3)
+    this.t2 = validDate(t2)
+    this.t1 = validDate(t1)
+
+    this.group = new WithGdl(dob, province, oop, licence, this.t3, this.t2, this.t1)
   }
 
-  t3valid() {
-    return this.t3.isValid()
+  t3Visible = () => {
+    if (this.licence === 'g') {
+      return true
+    }
+    return false
   }
 
-  t2valid() {
-    return this.t3.isValid()
+  t2Visible = () => {
+    if (this.licence === 'g2') {
+      return true
+    } else if (this.t3 && this.t3.isAfter(this.gdlDate)) {
+      return true
+    }
+    return false
   }
 
-  t1valid() {
-    return this.t3.isValid()
+  t1Visible = () => {
+    if (this.licence === 'g1' || this.licence === 'g2') {
+      return true
+    } else if (this.t3 && this.t3.isAfter(this.gdlDate)) {
+      return true
+    }
+    return false
   }
 
-  visibleFields = () => {
-    let fields = { t3: true, t2: true, t1: false }
-    return fields
+  visible = () => {
+    return {
+      t3: this.t3Visible(),
+      t2: this.t2Visible(),
+      t1: this.t1Visible(),
+    }
   }
 
   toDestroy = () => {
-    let visible = this.visibleFields()
-    let keys = Object.keys(visible)
-    return keys.filter(k => visible[k] && `${k}_date`)
+    let fields = []
+
+    if (!this.t3Visible()) {
+      fields.push('t3_date')
+    }
+
+    if (!this.t2Visible()) {
+      fields.push('t2_date')
+    }
+
+    if (!this.t1Visible()) {
+      fields.push('t1_date')
+    }
+
+    return fields
   }
 
   fieldErrors = () => {
     return {
-      t3_date: '',
-      t2_date: '',
-      t1_date: '',
+      t3: '',
+      t2: '',
+      t1: '',
     }
-  }
-
-  isGdl = () => {
-    if (this.t3.isValid()) {
-      if (this.t3.isAfter(this.gdlDate)) {
-        return true
-      }
-    }
-    return false
   }
 }
 
-const validateLicensing = (dob, t3, t2, t1) => {
-  console.log('got: ', dob, t3, t2, t1)
-  if (moment(t3, 'YYYY-MM-DD', true).isValid()) {
-    console.log('valid t3')
-  } else if (moment(t2, 'YYYY-MM-DD', true).isValid()) {
-    console.log('valid t2')
-  } else if (moment(t1, 'YYYY-MM-DD', true).isValid()) {
-    console.log('valid t1')
-  }
-}
-
-export default validateLicensing
+export default LicenceGroup
