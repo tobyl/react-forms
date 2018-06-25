@@ -7,6 +7,8 @@ import { LicenceGroup } from './validateLicensing'
 class LicenceDates extends React.Component {
   state = {
     dob: '1977-08-07',
+    province: 'ON',
+    oop: false,
     t3: false,
     t2: false,
     t1: false,
@@ -18,15 +20,38 @@ class LicenceDates extends React.Component {
   }
 
   datesChange = (value) => {
+    let { dob, province, oop } = this.state
     let t3 = this.props.getValue('t3_date')
     let t2 = this.props.getValue('t2_date')
     let t1 = this.props.getValue('t1_date')
-    let g = new LicenceGroup(this.state.dob, value, t3, t2, t1)
+    let g = new LicenceGroup(dob, province, oop, value, t3, t2, t1)
+
+    //  visible: {
+    //    t3: boolean,
+    //    t2: boolean,
+    //    t1: boolean,
+    //  }
+
+    //  destroy: ['t3', 't1'] or 't3'
+
+    //  this.props.setErrors({
+    //    t3_date: 'some error',
+    //    t2_date: '',
+    //    t1_date: 'some error',
+    //  })
+
+
+    // console.log('visible: ', g.visibleFields())
+    // console.log('to destroy: ', g.toDestroy())
+    // console.log('errors: ', g.fieldErrors())
+
     this.setState({
       ...this.state,
-      ...g.visible(),
-    })
-    // this.props.destroy(g.toDestroy())
+      ...g.visibleFields(),
+    }, () =>
+      this.props.destroy(g.toDestroy()),
+      this.props.setErrors(g.fieldErrors())
+    )
   }
 
   render() {
@@ -34,7 +59,9 @@ class LicenceDates extends React.Component {
     return (
       <fieldset>
         <p>
-          <small>dob: {this.state.dob}</small>
+          <small>dob: {this.state.dob}</small><br />
+          <small>province: {this.state.province}</small><br />
+          <small>out of province: {this.state.oop}</small>
         </p>
         <Select
           name="licence_class"

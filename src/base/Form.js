@@ -29,9 +29,13 @@ const Form = (Component) => {
     update = (field, value) => {
       let formData = Object.assign(this.state.formData, {})
       formData[field] = value
-      this.setState({ formData }, () =>
-        this.clearError(field)
-      )
+      this.setState({ formData }, () => {
+        if (value !== '' && value !== null && value !== undefined) {
+          // on mount, first run, or empty value, don't clear error
+          // should there be a check for touched?
+          this.clearError(field)
+        }
+      })
     }
 
     destroy = (field) => {
@@ -48,10 +52,7 @@ const Form = (Component) => {
       })
     }
 
-    get = (field) => {
-      // console.log('get ', field)
-      return this.state.formData[field]
-    }
+    get = (field) => this.state.formData[field]
 
     setRoute = (route) => {
       if (this.routes.indexOf(route) === -1) {
@@ -60,7 +61,8 @@ const Form = (Component) => {
     }
 
     setErrors = (errors) => {
-      this.setState({ errors })
+      let nextErrors = Object.assign(this.state.errors, errors)
+      this.setState({ errors: nextErrors })
     }
 
     clearError = (field) => {
@@ -78,6 +80,7 @@ const Form = (Component) => {
           getValue: this.get,
           destroy: this.destroy,
           errors: this.state.errors,
+          setErrors: this.setErrors,
         }}>
           <Route path="/vehicle-add/:formStep" render={(matchProps) =>
             <Component

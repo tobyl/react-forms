@@ -2,7 +2,8 @@
   "errors": {
     "requester_name": "Invalid requester!",
     "vehicle_driver": "You cannot choose that driver",
-    "0x0001": "This policy cannot be selected!"
+    "0x0001": "This policy cannot be selected!",
+    "postal_code": "Bad postal code"
   },
   "posts": [
     { "id": 1, "title": "json-server", "author": "typicode" }

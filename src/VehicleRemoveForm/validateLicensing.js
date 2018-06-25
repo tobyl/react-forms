@@ -1,5 +1,13 @@
 import moment from 'moment'
 
+class NonGdlLicence {
+
+}
+
+class GdlLicence {
+
+}
+
 export class LicenceGroup {
   constructor(dob, licence, t3, t2, t1) {
     this.dob = moment(dob).startOf('day')
@@ -23,28 +31,23 @@ export class LicenceGroup {
     return this.t3.isValid()
   }
 
-  visible = () => {
-    let fields = { t3: false, t2: false, t1: false }
-
-    if (this.licence) {
-      if (this.t3 && this.t3valid()) {
-        if (this.t3.isAfter(this.gdlDate)) {
-          fields = { t3: true, t2: true, t1: true }
-        } else {
-          fields = { t3: true, t2: false, t1: false }
-        }
-      } else {
-        fields = { t3: true, t2: false, t1: false }
-      }
-    }
-
+  visibleFields = () => {
+    let fields = { t3: true, t2: true, t1: false }
     return fields
   }
 
   toDestroy = () => {
-    let visible = this.visible()
+    let visible = this.visibleFields()
     let keys = Object.keys(visible)
-    return keys.map(k => visible[k])
+    return keys.filter(k => visible[k] && `${k}_date`)
+  }
+
+  fieldErrors = () => {
+    return {
+      t3_date: '',
+      t2_date: '',
+      t1_date: '',
+    }
   }
 
   isGdl = () => {
