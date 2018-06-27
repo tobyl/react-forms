@@ -1,5 +1,12 @@
 import moment from 'moment'
 
+export const dateDobDelta = (value, dob) => {
+  if (value && dob) {
+    console.log('val and dob: ', value, dob)
+  }
+  return false
+}
+
 export const validDate = (value) => {
   if (value) {
     if (moment(value, 'YYYY-MM-DD', true)) {

@@ -26,27 +26,8 @@ class LicenceDates extends React.Component {
     let t2 = this.props.getValue('t2_date')
     let t1 = this.props.getValue('t1_date')
 
-    let g = new LicenceGroup(dob, province, oop, licence, t3, t2, t1)
-
-    //  visible: {
-    //    t3: boolean,
-    //    t2: boolean,
-    //    t1: boolean,
-    //  }
-
-    //  destroy: ['t3', 't1'] or 't3'
-
-    //  this.props.setErrors({
-    //    t3_date: 'some error',
-    //    t2_date: '',
-    //    t1_date: 'some error',
-    //  })
-
-
-    // console.log('visible: ', g.visibleFields())
-    // console.log('to destroy: ', g.toDestroy())
-    // console.log('errors: ', g.fieldErrors())
-
+    let g = new LicenceGroup(dob, province, licence, oop, t3, t2, t1)
+    
     this.setState({
       ...this.state,
       t3: g.visible().t3,
@@ -65,7 +46,7 @@ class LicenceDates extends React.Component {
         <p>
           <small>dob: {this.state.dob}</small><br />
           <small>province: {this.state.province}</small><br />
-          <small>out of province: {this.state.oop}</small>
+          <small>out of province: {this.state.oop ? 'True' : 'False'}</small>
         </p>
         <Select
           name="licence_class"

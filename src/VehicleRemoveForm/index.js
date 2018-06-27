@@ -1,8 +1,9 @@
 import React from 'react'
 import Form from 'base/Form'
 import GetStarted from './GetStarted'
-import LicenceDates from './LicenceDates'
+import DriverLicensing from './DriverLicensing'
 import VehicleReview from './VehicleReview'
+import VehicleUsage from './VehicleUsage'
 
 const PolicyDrivers = [
   { id: '01', first_name: 'John', last_name: 'Doe' },
@@ -21,7 +22,8 @@ class VehicleRemoveForm extends React.Component {
         <GetStarted
           drivers={PolicyDrivers}
         />
-        <LicenceDates />
+        <DriverLicensing />
+        <VehicleUsage />
         {PolicyVehicles.map(v =>
           <VehicleReview
             key={v.id}

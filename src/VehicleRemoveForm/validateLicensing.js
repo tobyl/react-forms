@@ -1,11 +1,10 @@
 import moment from 'moment'
 import { validDate, afterToday } from 'dateServices'
 
-class WithGdl {
-  constructor(dob, province, oop, licence, t3, t2, t1) {
-    this.dob = dob
+class GdlGroup {
+  constructor(dob, province, licence, t3, t2, t1) {
+    this.dob = validDate(dob)
     this.province = province
-    this.oop = oop
     this.licence = licence
     this.errors = {
       t3: '',
@@ -15,8 +14,28 @@ class WithGdl {
   }
 }
 
+class SingleLicence {
+  constructor(dob, province, licence, oop, t3) {
+    this.dob = validDate(dob)
+    this.province = province
+    this.licence = licence
+    this.t3 = validDate(t3)
+    this.t3Error = this.t3Error()
+  }
+
+  t3Error = () => {
+    if (this.t3) {
+      if (afterToday(this.t3)) {
+        return 'Date cannot be after today'
+      }
+    }
+    return ''
+  }
+
+}
+
 class LicenceGroup {
-  constructor(dob, province, oop, licence, t3, t2, t1) {
+  constructor(dob, province, licence, oop, t3, t2, t1) {
 
     // setup
     this.dob = moment(dob).startOf('day')
@@ -31,7 +50,11 @@ class LicenceGroup {
     this.t2 = validDate(t2)
     this.t1 = validDate(t1)
 
-    this.group = new WithGdl(dob, province, oop, licence, this.t3, this.t2, this.t1)
+    this.group = new SingleLicence(dob, province, licence, oop, this.t3)
+
+    if (this.t2 || this.t1) {
+      this.group = new GdlGroup(dob, province, licence, oop, this.t3, this.t2, this.t1)
+    }
   }
 
   t3Visible = () => {
@@ -60,6 +83,9 @@ class LicenceGroup {
   }
 
   visible = () => {
+    if (this.licence === '-1') {
+      return { t3: false, t2: false, t1: false }
+    }
     return {
       t3: this.t3Visible(),
       t2: this.t2Visible(),
@@ -68,6 +94,11 @@ class LicenceGroup {
   }
 
   toDestroy = () => {
+
+    if (this.licence === '-1') {
+      return ['t3_date', 't2_date', 't1_date']
+    }
+
     let fields = []
 
     if (!this.t3Visible()) {
@@ -87,9 +118,9 @@ class LicenceGroup {
 
   fieldErrors = () => {
     return {
-      t3: '',
-      t2: '',
-      t1: '',
+      't3_date': this.group.t3Error,
+      't2_date': '',
+      't1_date': '',
     }
   }
 }

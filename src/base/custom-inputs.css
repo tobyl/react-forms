@@ -85,3 +85,76 @@
 .field.toggle .field-error {
   margin-bottom: 0.75rem;
 }
+
+/* visual licence date */
+
+.VisualLicenceDate {
+  text-align: center;
+}
+
+.VisualLicenceDate:before {
+  content: '';
+  position: relative;
+  top: 20px;
+  display: block;
+  border-top: 1px solid #e1e1e1;
+}
+
+
+.VisualLicenceDate > span {
+  position: relative;
+  z-index: 1;
+  float: left;
+  display: inline-block;
+  background: #fff;
+  padding-right: 5px;
+  font-size: 0.75rem;
+  line-height: 36px;
+  color: #999;
+}
+
+.VisualLicenceDate button {
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  display: inline-block;
+  border: 1px solid #ccc;
+  line-height: 36px;
+  border-radius: 3px;
+  padding: 0 10px 0 0;
+  outline: none;
+}
+
+.VisualLicenceDate button svg {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+
+.VisualLicenceDate button svg path {
+  fill: #999;
+}
+
+.VisualLicenceDate button:hover {
+  cursor: pointer;
+}
+
+.VisualLicenceDate button:hover svg path {
+  fill: green;
+}
+
+.VisualLicenceDate button span {
+  display: inline-block;
+  border-right: 1px solid #ccc;
+  text-align: center;
+  width: 30px;
+  margin-right: 20px;
+  font-weight: 700;
+}
+
+.VisualLicenceDate button strong {
+  display: inline-block;
+  width: 90px;
+}

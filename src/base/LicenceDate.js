@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Field from './Field'
-import { validLicenceDate } from 'services'
+// import { validLicenceDate } from 'services'
 
 class LicenceDate extends React.Component {
   validateLicenceDate = (e) => {
-    this.props.setError(validLicenceDate(e.target.value))
+    // this.props.setError(validLicenceDate(e.target.value))
     this.props.blur()
   }
 

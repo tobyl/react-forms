@@ -68,11 +68,13 @@ const Field = (Component) => {
     }
   }
 
-  return React.forwardRef((props, ref) => (
-    <formContext.Consumer>
-      {state => <WrappedField {...props} {...state} ref={ref} />}
-    </formContext.Consumer>
-  ))
+  return React.forwardRef((props, ref) => {
+    return (
+      <formContext.Consumer>
+        {state => <WrappedField {...props} {...state} ref={ref} />}
+      </formContext.Consumer>
+    )}
+  )
 }
 
 export default Field

@@ -5,7 +5,6 @@ import { labelToSlug } from 'services'
 
 const Fieldset = (Component) => {
   class WrappedFieldset extends React.Component {
-
     renderFieldset = (matchProps) => {
       let fsName = this.props.fieldsetName || Component.name
       this.props.setRoute(labelToSlug(fsName))

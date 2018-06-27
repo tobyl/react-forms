@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import { Spinner } from 'Components/Spinner'
 
@@ -47,7 +48,21 @@ class FormNav extends React.Component {
       })
   }
 
+  nextDisabled = () => {
+    if (this.props.errors) {
+      let keys = Object.keys(this.props.errors)
+      let errorVals = keys.filter(k =>
+        this.props.errors[k] !== ''
+      )
+      return errorVals.length > 0
+    }
+    return true
+  }
+
   render() {
+    let next = classNames('btn next-btn', {
+      'disabled': this.nextDisabled(),
+    })
     return (
       <div>
         <Link
@@ -56,10 +71,10 @@ class FormNav extends React.Component {
         >back</Link>{' '}
         {this.getIndex() !== (this.props.routes.length - 1) &&
           <button
-          className="btn next-btn"
-          to={this.getNext()}
-          onClick={this.nextClick}
-        // >{this.state.submitting && <img src={Spinner} />}next</button>}{''}
+            className={next}
+            disabled={this.nextDisabled()}
+            to={this.getNext()}
+            onClick={this.nextClick}
         >{this.state.submitting && <Spinner />}next</button>}{''}
         {this.getIndex() === (this.props.routes.length - 1) && <button className="btn" type="submit">submit</button>}
       </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { logErrorToMyService } from 'sentry'
 import FormNav from './FormNav'
 import FormData from './FormData'
 
@@ -26,6 +27,11 @@ const Form = (Component) => {
       this.routes = []
     }
 
+    componentDidCatch(error, info) {
+      this.setState({ hasError: true })
+      logErrorToMyService(error, info)
+    }
+
     update = (field, value) => {
       let formData = Object.assign(this.state.formData, {})
       formData[field] = value
@@ -33,6 +39,7 @@ const Form = (Component) => {
         if (value !== '' && value !== null && value !== undefined) {
           // on mount, first run, or empty value, don't clear error
           // should there be a check for touched?
+          console.log('clearing error for ', field)
           this.clearError(field)
         }
       })
@@ -93,6 +100,7 @@ const Form = (Component) => {
             <FormNav
               {...matchProps}
               routes={this.routes}
+              errors={this.state.errors}
               setErrors={this.setErrors}
             />}
           />
