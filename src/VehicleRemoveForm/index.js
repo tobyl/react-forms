@@ -19,9 +19,7 @@ class VehicleRemoveForm extends React.Component {
   render() {
     return (
       <div>
-        <GetStarted
-          drivers={PolicyDrivers}
-        />
+        <GetStarted drivers={PolicyDrivers} />
         <DriverLicensing />
         <VehicleUsage />
         {PolicyVehicles.map(v =>

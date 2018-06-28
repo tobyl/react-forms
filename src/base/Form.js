@@ -14,6 +14,9 @@ const initialData = { // eslint-disable-line no-unused-vars
   '0x0002': true,
   requester_name: '01',
   effective_date: '2018-07-01',
+  vehicle_usage: 'commuting',
+  annual_kms: '121',
+  daily_kms: '21',
 }
 
 const Form = (Component) => {
@@ -45,6 +48,29 @@ const Form = (Component) => {
       })
     }
 
+    cleanField = (field, value, cleans) => {
+      let errors = {}
+      for (let fnc of cleans) {
+        let err = fnc(value)
+        if (err) {
+          errors[field] = err
+          break
+        }
+      }
+      this.setErrors(errors)
+    }
+
+    setErrors = (errors) => {
+      let nextErrors = Object.assign(this.state.errors, errors)
+      this.setState({ errors: nextErrors })
+    }
+
+    clearError = (field) => {
+      let nextErrors = Object.assign(this.state.errors, {})
+      delete nextErrors[field]
+      this.setState({ errors: nextErrors })
+    }
+
     destroy = (field) => {
       let nextState = Object.assign(this.state.formData, {})
       if (field.constructor === Array) {
@@ -59,23 +85,12 @@ const Form = (Component) => {
       })
     }
 
-    get = (field) => this.state.formData[field]
+    getValue = (field) => this.state.formData[field]
 
     setRoute = (route) => {
       if (this.routes.indexOf(route) === -1) {
         this.routes.push(route)
       }
-    }
-
-    setErrors = (errors) => {
-      let nextErrors = Object.assign(this.state.errors, errors)
-      this.setState({ errors: nextErrors })
-    }
-
-    clearError = (field) => {
-      let nextErrors = Object.assign(this.state.errors, {})
-      delete nextErrors[field]
-      this.setState({ errors: nextErrors })
     }
 
     render() {
@@ -84,10 +99,11 @@ const Form = (Component) => {
           formData: this.state.formData,
           update: this.update,
           setRoute: this.setRoute,
-          getValue: this.get,
+          getValue: this.getValue,
           destroy: this.destroy,
           errors: this.state.errors,
           setErrors: this.setErrors,
+          cleanField: this.cleanField,
         }}>
           <Route path="/vehicle-add/:formStep" render={(matchProps) =>
             <Component
