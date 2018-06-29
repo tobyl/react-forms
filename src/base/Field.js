@@ -2,6 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 import { formContext } from './Form'
 
+import './field.css'
+
 const Field = (Component) => {
   class WrappedField extends React.Component {
 
@@ -60,6 +62,10 @@ const Field = (Component) => {
       let classes = classNames('field', {
         'toggle': this.props.toggleLabel,
         'active': this.state.active,
+        'text': Component.name === 'Text' ||
+                Component.name === 'Select' ||
+                Component.name === 'PostalCode' ||
+                Component.name === 'Date'
       })
       return (
         <div className={classes}>

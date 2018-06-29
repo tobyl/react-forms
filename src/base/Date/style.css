@@ -1,0 +1,44 @@
+.DatePicker {
+  display: inline-block;
+  padding: 0.5rem;
+  background: #e1e1e1;
+  font-size: 0.9rem;
+  border-radius: 0.2rem;
+}
+
+.DatePicker td {
+  background: #fff;
+  color: #777;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+}
+
+.DatePicker .Day:hover {
+  background: #e1e1e1;
+  cursor: pointer;
+}
+
+.DatePicker {
+  display: inline-block;
+  border: 1px solid #ccc;
+}
+
+.DatePicker .Day.Today {
+  background: #d3d3d3;
+  color: #666;
+}
+
+.DatePicker .Day.Weekend {
+  color: #999;
+}
+
+.DatePicker .Day.Selected {
+  background: #e1e1e1;
+  color: #666;
+}
+
+.DatePicker .Day.OutsideCurrentMonth {
+  background: rgba(255,255,255,0.5);
+  color: #aaa;
+}

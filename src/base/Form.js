@@ -95,36 +95,38 @@ const Form = (Component) => {
 
     render() {
       return (
-        <formContext.Provider value={{
-          formData: this.state.formData,
-          update: this.update,
-          setRoute: this.setRoute,
-          getValue: this.getValue,
-          destroy: this.destroy,
-          errors: this.state.errors,
-          setErrors: this.setErrors,
-          cleanField: this.cleanField,
-        }}>
-          <Route path="/vehicle-add/:formStep" render={(matchProps) =>
-            <Component
-              formData={this.state.formData}
-              setRoute={this.setRoute}
-              {...matchProps}
+        <form>
+          <formContext.Provider value={{
+            formData: this.state.formData,
+            update: this.update,
+            setRoute: this.setRoute,
+            getValue: this.getValue,
+            destroy: this.destroy,
+            errors: this.state.errors,
+            setErrors: this.setErrors,
+            cleanField: this.cleanField,
+          }}>
+            <Route path="/vehicle-add/:formStep" render={(matchProps) =>
+              <Component
+                formData={this.state.formData}
+                setRoute={this.setRoute}
+                {...matchProps}
+              />
+            }/>
+            <Route render={(matchProps) =>
+              <FormNav
+                {...matchProps}
+                routes={this.routes}
+                errors={this.state.errors}
+                setErrors={this.setErrors}
+              />}
             />
-          }/>
-          <Route render={(matchProps) =>
-            <FormNav
-              {...matchProps}
-              routes={this.routes}
+            <FormData
+              formData={this.state.formData}
               errors={this.state.errors}
-              setErrors={this.setErrors}
-            />}
-          />
-          <FormData
-            formData={this.state.formData}
-            errors={this.state.errors}
-          />
-        </formContext.Provider>
+            />
+          </formContext.Provider>
+        </form>
       )
     }
   }

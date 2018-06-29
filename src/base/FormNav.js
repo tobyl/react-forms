@@ -30,7 +30,8 @@ class FormNav extends React.Component {
     return this.props.routes[this.getIndex() - 1]
   }
 
-  nextClick = () => {
+  nextClick = (e) => {
+    e.preventDefault()
     this.setState({ submitting: true })
     fetch('http://localhost:3001/errors')
       .then(response => response.json())
@@ -46,6 +47,10 @@ class FormNav extends React.Component {
           // proceed to next fieldset!
         }
       })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
   }
 
   nextDisabled = () => {

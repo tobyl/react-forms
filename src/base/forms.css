@@ -1,11 +1,11 @@
+form {
+  width: 50%;
+}
+
 fieldset {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-.Fieldset {
-  width: 60%;
 }
 
 .fieldset-label {
@@ -14,15 +14,6 @@ fieldset {
   line-height: 1.5rem;
   margin-bottom: 2rem;
   color: #003388;
-}
-
-.field > label:not(.ToggleLabel),
-.field > .label,
-.ToggleGroup > span {
-  display: inline-block;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-  color: #666;
 }
 
 input[type=text],
@@ -42,31 +33,6 @@ select {
   outline: none;
 }
 
-.field {
-  font-size: 0.9rem;
-  padding-bottom: 1rem;
-}
-
-.field.active input,
-.field.active select {
-  border-color: #999;
-}
-
-.field.toggle {
-  padding-bottom: 0;
-}
-
 .ToggleGroup {
   padding-bottom: 1rem;
-}
-
-.field-error {
-  color: #FE2712;
-}
-
-.field .select-chevron {
-  position: absolute;
-  top: 12px;
-  right: 0.75rem;
-  pointer-events: none;
 }

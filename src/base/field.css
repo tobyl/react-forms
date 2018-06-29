@@ -1,0 +1,37 @@
+.field > label:not(.ToggleLabel),
+.field > .label,
+.ToggleGroup > span {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.field {
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+}
+
+.field.text > label {
+  display: block;
+}
+
+.field.active input,
+.field.active select {
+  border-color: #999;
+}
+
+.field.toggle {
+  padding-bottom: 0;
+}
+
+.field-error {
+  color: #FE2712;
+}
+
+.field .select-chevron {
+  position: absolute;
+  top: 12px;
+  right: 0.75rem;
+  pointer-events: none;
+}

@@ -4,8 +4,6 @@ import Fieldset from 'base/Fieldset'
 import VisualLicenceDate from 'base/LicenceDateFields/VisualLicenceDate'
 import Toggle from 'base/Toggle'
 
-import './style.css'
-
 class DriverLicensing extends React.Component {
   constructor(props) {
     super(props)
