@@ -95,7 +95,6 @@ const Form = (Component) => {
 
     render() {
       return (
-        <form>
           <formContext.Provider value={{
             formData: this.state.formData,
             update: this.update,
@@ -106,27 +105,29 @@ const Form = (Component) => {
             setErrors: this.setErrors,
             cleanField: this.cleanField,
           }}>
-            <Route path="/vehicle-add/:formStep" render={(matchProps) =>
-              <Component
-                formData={this.state.formData}
-                setRoute={this.setRoute}
-                {...matchProps}
+            <form>
+              <Route path="/vehicle-add/:formStep" render={(matchProps) =>
+                <Component
+                  formData={this.state.formData}
+                  setRoute={this.setRoute}
+                  {...matchProps}
+                />
+              }/>
+              <Route render={(matchProps) =>
+                <FormNav
+                  {...matchProps}
+                  routes={this.routes}
+                  errors={this.state.errors}
+                  setErrors={this.setErrors}
+                />}
               />
-            }/>
-            <Route render={(matchProps) =>
-              <FormNav
-                {...matchProps}
-                routes={this.routes}
-                errors={this.state.errors}
-                setErrors={this.setErrors}
-              />}
-            />
+            </form>
             <FormData
               formData={this.state.formData}
               errors={this.state.errors}
             />
           </formContext.Provider>
-        </form>
+
       )
     }
   }

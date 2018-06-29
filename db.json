@@ -1,10 +1,9 @@
 {
-  "errors": {
-    "requester_name": "Invalid requester!",
-    "vehicle_driver": "You cannot choose that driver",
-    "0x0001": "This policy cannot be selected!",
-    "postal_code": "Bad postal code",
-    "annual_kms": "Annual KMs cannot be this value!"
+  "errors": {},
+  "vehicle": {
+    "vehicle_year": "2015",
+    "vehicle_make": "Honda",
+    "vehicle_model": "Fit LX"
   },
   "posts": [
     { "id": 1, "title": "json-server", "author": "typicode" }

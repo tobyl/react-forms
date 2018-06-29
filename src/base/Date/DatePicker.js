@@ -41,8 +41,6 @@ class DatePicker extends React.Component {
       day = day.clone().add(1, 'd')
     }
 
-    console.log(day.format('YYYY-MM-DD'), this.state.date.format('YYYY-MM-DD'))
-
     return (
       <tr key={week}>
         {days.map((day, i) => (

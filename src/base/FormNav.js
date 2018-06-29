@@ -44,9 +44,10 @@ class FormNav extends React.Component {
             this.props.setErrors(response)
           )
         } else {
-          // proceed to next fieldset!
+          this.props.history.push(this.getNext())
         }
       })
+      .then(() => this.setState({ submitting: false }))
   }
 
   handleSubmit = (e) => {

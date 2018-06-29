@@ -19,3 +19,9 @@ export const provinces = [
   ['SK', 'Saskatchewan'],
   ['YT', 'Yukon'],
 ]
+
+export const vehicleCondition = [
+      ['new', 'New'],
+      ['used', 'Used'],
+      ['demo', 'Demo'],
+    ]

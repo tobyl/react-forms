@@ -50,3 +50,25 @@ export const validLicenceDate = (value) => {
 }
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const vinRegex = new RegExp("^[ABCDEFGHJKLMNPRSTUVWXYZ1234567890]{17}$", "i")
+const numbersRegex = new RegExp(/^[0-9]+$/)
+const lettersRegex = new RegExp(/^[a-z]+$/, 'i')
+
+export function validVin(value) {
+  if (!value.match(vinRegex)) {
+    return 'Invalid VIN'
+  } else if (value.match(numbersRegex) || value.match(lettersRegex)) {
+    return 'Invalid VIN'
+  }
+  return ''
+}
+
+export function isValidVin(value) {
+  if (!value.match(vinRegex)) {
+    return false
+  } else if (value.match(numbersRegex) || value.match(lettersRegex)) {
+    return false
+  }
+  return true
+}

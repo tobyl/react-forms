@@ -36,7 +36,8 @@
 .ToggleLabel span,
 .RadioLabel span {
   display: inline-block;
-  line-height: 30px;
+  line-height: 22px;
+  padding-top: 6px;
 }
 
 .ToggleLabel:after,
