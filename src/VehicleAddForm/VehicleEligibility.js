@@ -1,14 +1,6 @@
 import React from 'react'
 import Fieldset from 'base/Fieldset'
 import Toggle from 'base/Toggle'
-import Select from 'base/Select'
-import Date from 'base/Date'
-import Text from 'base/Text'
-
-const policies = [
-  ['0x000001', '0x000001'],
-  ['0x000002', '0x000002'],
-]
 
 class VehicleEligibility extends React.Component {
   render() {

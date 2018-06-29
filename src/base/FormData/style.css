@@ -3,11 +3,13 @@
   z-index: 10;
   bottom: 0;
   right: 0;
+  top: 1rem;
   padding: 1rem 1rem 0 0;
 }
 
 .FormData ul {
   position: absolute;
+  top: 0;
   bottom: 4.5rem;
   right: 1rem;
   list-style: none;
@@ -17,6 +19,7 @@
   border-radius: 3px;
   width: 300px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  overflow: scroll;
 }
 
 .FormData ul li {

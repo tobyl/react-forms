@@ -13,13 +13,11 @@ const getValue = (value) => {
   }
 }
 
-const DataItem = ({ label, value, error }) => {
+const DataItem = ({ label, value }) => {
   label = consts[label] || label
   return (
     <li>
-      <h4>{label}</h4>
-      <p>{getValue(value)}</p>
-      {error && <p className="data-error">{error}</p>}
+      <p>{label}: {getValue(value)}</p>
     </li>
   )
 }

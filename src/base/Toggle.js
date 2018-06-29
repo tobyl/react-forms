@@ -6,6 +6,17 @@ import './custom-inputs.css'
 
 class Toggle extends React.Component {
 
+  componentDidMount() {
+    // set to false by default
+    let e = {
+      target: {
+        checked: false,
+        value: false,
+      }
+    }
+    this.props.change(e)
+  }
+
   toggleChange = (e) => {
     this.props.change(e)
   }

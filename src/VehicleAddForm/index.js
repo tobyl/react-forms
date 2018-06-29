@@ -6,16 +6,7 @@ import PrincipalDriver from './PrincipalDriver'
 import VehicleDetails from './VehicleDetails'
 import VehicleUsage from './VehicleUsage'
 import VehicleEligibility from './VehicleEligibility'
-
-const PolicyDrivers = [
-  { id: '01', first_name: 'John', last_name: 'Doe' },
-  { id: '02', first_name: 'Jane', last_name: 'Doe' },
-]
-
-const PolicyVehicles = [
-  { id: 1, year: '2012', make: 'Ford', model: 'Focus' },
-  { id: 2, year: '2015', make: 'Honda', model: 'Fit' },
-]
+import ConfirmPage from 'base/ConfirmPage'
 
 const requesterName = [
   ['01', 'John Doe'],
@@ -33,6 +24,9 @@ class VehicleAddForm extends React.Component {
         <VehicleDetails />
         <VehicleUsage />
         <VehicleEligibility />
+        <ConfirmPage
+          drivers={requesterName}
+        />
       </div>
     )
   }

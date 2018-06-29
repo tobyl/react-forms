@@ -18,6 +18,10 @@ const Field = (Component) => {
       let existingValue = this.props.getValue(this.props.name)
       if (existingValue || typeof existingValue === 'boolean') {
         this.setState({ value: existingValue })
+      } else if (this.props.defaultValue) {
+        this.setState({ value: this.props.defaultValue }, () =>
+          this.props.update(this.props.name, this.props.defaultValue)
+        )
       } else {
         this.props.update(this.props.name, '')
       }

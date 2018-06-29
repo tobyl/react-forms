@@ -3,7 +3,6 @@ import Fieldset from 'base/Fieldset'
 import Radio from 'base/Radio'
 import Select from 'base/Select'
 import Date from 'base/Date'
-import Text from 'base/Text'
 
 const policies = [
   ['0x000001', '0x000001'],

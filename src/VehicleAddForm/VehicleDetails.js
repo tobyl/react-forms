@@ -1,8 +1,6 @@
 import React from 'react'
 import Fieldset from 'base/Fieldset'
-import Radio from 'base/Radio'
 import Select from 'base/Select'
-import Date from 'base/Date'
 import Text from 'base/Text'
 import { provinces, vehicleCondition } from 'helpers'
 
@@ -27,6 +25,7 @@ class VehicleDetails extends React.Component {
           name="vehicle_province"
           label="What province is this vehicle registered in"
           choices={provinces}
+          defaultValue="ON"
         />
         <Text
           name="vehicle_price"

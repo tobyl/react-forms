@@ -1,7 +1,6 @@
 import React from 'react'
 import Fieldset from 'base/Fieldset'
 import Select from 'base/Select'
-import Text from 'base/Text'
 
 class PrincipalDriver extends React.Component {
   render() {
