@@ -17,7 +17,7 @@ const DataItem = ({ label, value }) => {
   label = consts[label] || label
   return (
     <li>
-      <p>{label}: {getValue(value)}</p>
+      <p><strong>{label}</strong> {getValue(value)}</p>
     </li>
   )
 }

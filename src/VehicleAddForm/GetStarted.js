@@ -1,6 +1,6 @@
 import React from 'react'
 import Fieldset from 'base/Fieldset'
-import Radio from 'base/Radio'
+import Toggle from 'base/Toggle'
 import Select from 'base/Select'
 import Date from 'base/Date'
 
@@ -13,11 +13,16 @@ class GetStarted extends React.Component {
   render() {
     return (
       <fieldset>
-        <Radio
-          name="request_policies"
-          label="Policies"
-          choices={policies}
-        />
+        <div className="ToggleGroup">
+          <span>Which policies are this request for?</span>
+          {policies.map(p =>
+            <Toggle
+              key={p[0]}
+              name={p[0]}
+              toggleLabel={p[1]}
+            />
+          )}
+        </div>
         <Select
           name="requester_name"
           label="Who is requesting this change?"
