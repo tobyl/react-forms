@@ -1,9 +1,9 @@
 .DatePicker {
   display: inline-block;
   padding: 0.5rem;
-  background: #e1e1e1;
   font-size: 0.9rem;
   border-radius: 0.2rem;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.2);
 }
 
 .DatePicker td {
@@ -11,7 +11,9 @@
   color: #777;
   width: 2rem;
   height: 2rem;
+  line-height: 2rem;
   text-align: center;
+  border-radius: 1rem;
 }
 
 .DatePicker .Day:hover {
@@ -41,4 +43,40 @@
 .DatePicker .Day.OutsideCurrentMonth {
   background: rgba(255,255,255,0.5);
   color: #aaa;
+}
+
+/* month nav */
+
+.MonthNav {
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  line-height: 30px;
+}
+
+.MonthNav .Prev,
+.MonthNav .Next {
+  position: absolute;
+  top: 0;
+  appearance: none;
+  border: 1px solid #bbb;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 16px;
+  outline: none;
+}
+
+.MonthNav .Prev:focus,
+.MonthNav .Next:focus {
+  box-shadow: 0 0 0 1px #bbb;
+}
+
+.MonthNav .Prev {
+  left: 0;
+}
+
+.MonthNav .Next {
+  right: 0;
 }

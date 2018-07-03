@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import Day from './Day'
+import MonthNav from './MonthNav'
 
 moment.locale('en-CA', {
   weekdaysShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -25,6 +26,10 @@ class DatePicker extends React.Component {
     this.setState({ date: day }, () =>
       this.props.setDate(day)
     )
+  }
+
+  setMonth = (date) => {
+    this.setState({ date: date })
   }
 
   displayWeek = (week) => {
@@ -56,11 +61,10 @@ class DatePicker extends React.Component {
     )
   }
 
-  getMonths = () => moment.months().map(m => [m, m])
-
   render() {
     return (
       <div className="DatePicker">
+        <MonthNav date={this.state.date} setMonth={this.setMonth} />
         <table>
           <tbody>
             <tr>
