@@ -1,0 +1,74 @@
+.LicenceDateButton {
+  text-align: center;
+}
+
+.LicenceDateButton:before {
+  content: '';
+  position: relative;
+  top: 20px;
+  display: block;
+  border-top: 1px solid #e1e1e1;
+}
+
+.LicenceDateButton.NoLicence button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.LicenceDateButton > span {
+  position: relative;
+  z-index: 1;
+  float: left;
+  display: inline-block;
+  background: #fff;
+  padding-right: 5px;
+  font-size: 0.75rem;
+  line-height: 36px;
+  color: #999;
+}
+
+.LicenceDateButton button {
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  display: inline-block;
+  border: 1px solid #ccc;
+  line-height: 36px;
+  border-radius: 3px;
+  padding: 0 10px 0 0;
+  outline: none;
+}
+
+.LicenceDateButton button svg {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+
+.LicenceDateButton button svg path {
+  fill: #999;
+}
+
+.LicenceDateButton button:hover {
+  cursor: pointer;
+}
+
+.LicenceDateButton button:hover svg path {
+  fill: green;
+}
+
+.LicenceDateButton button span {
+  display: inline-block;
+  border-right: 1px solid #ccc;
+  text-align: center;
+  width: 30px;
+  margin-right: 20px;
+  font-weight: 700;
+}
+
+.LicenceDateButton button strong {
+  display: inline-block;
+  width: 90px;
+}

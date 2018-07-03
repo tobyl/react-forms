@@ -8,7 +8,6 @@ const Fieldset = (Component) => {
     renderFieldset = (matchProps) => {
       let fsName = this.props.fieldsetName || Component.name
       this.props.setRoute(labelToSlug(fsName))
-      console.log(labelToSlug(fsName))
       if (matchProps.match.params.formStep === labelToSlug(fsName)) {
         return (
           <Component {...this.props} prefix={this.props.prefix} />

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Field from '../Field'
-import VisualDateChooser from './VisualDateChooser'
 import { Pencil } from 'icons'
 
 class VisualLicenceDate extends React.Component {
@@ -19,7 +18,8 @@ class VisualLicenceDate extends React.Component {
     }
   }
 
-  dateClick = () => {
+  dateClick = (e) => {
+    e.preventDefault()
     this.setState({ pickerVisible: !this.state.pickerVisible })
   }
 
@@ -34,21 +34,7 @@ class VisualLicenceDate extends React.Component {
             <strong>{momentDate && momentDate.format('MMMM Do YYYY')}</strong>
             <Pencil />
           </button>
-          {this.state.pickerVisible &&
-            <VisualDateChooser
-              setDate={setDate}
-              change={change}
-              momentDate={momentDate}
-            />}
         </div>
-        {/* <input
-          name={name}
-          value={value}
-          onChange={change}
-          onFocus={focus}
-          onBlur={blur}
-          type="text"
-        /> */}
         {error && <div className="field-error">{error}</div>}
       </React.Fragment>
     )
