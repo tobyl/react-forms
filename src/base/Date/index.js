@@ -13,10 +13,16 @@ class Date extends React.Component {
   }
 
   render() {
-    const { error } = this.props
+    const { error, minDate, maxDate, getValue, name } = this.props
     return (
       <React.Fragment>
-        <DatePicker setDate={this.setDate} getValue={this.props.getValue}  name={this.props.name} />
+        <DatePicker
+          setDate={this.setDate}
+          getValue={getValue}
+          name={name}
+          minDate={minDate}
+          maxDate={maxDate}
+        />
         {error && <div className="field-error">{error}</div>}
       </React.Fragment>
     )

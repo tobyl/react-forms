@@ -55,6 +55,8 @@ class DatePicker extends React.Component {
             currentMonth={currentMonth}
             selectedDate={this.props.getValue(this.props.name)}
             dayClick={this.dayClick}
+            minDate={this.props.minDate}
+            maxDate={this.props.maxDate}
           />
         ))}
       </tr>

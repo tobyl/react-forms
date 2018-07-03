@@ -44,13 +44,20 @@
 }
 
 .DatePicker .Day.Selected {
-  box-shadow: 0 0 0 1px #bbb;
-  background: red;
+  background: rgba(0,0,0,0.05);
+  box-shadow: 0 0 0 1px #999;
+  color: #444;
 }
 
-.DatePicker .Day.OutsideCurrentMonth {
-  background: rgba(255,255,255,0.5);
-  color: #aaa;
+.DatePicker .Day.BeforeMin,
+.DatePicker .Day.AfterMax {
+  color: #bbb;
+}
+
+.DatePicker .Day.BeforeMin:hover,
+.DatePicker .Day.AfterMax:hover {
+  background: #fff;
+  cursor: not-allowed;
 }
 
 /* month nav */

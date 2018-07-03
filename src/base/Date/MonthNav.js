@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import { Next, Previous } from 'icons'
 
 class MonthNav extends React.Component {

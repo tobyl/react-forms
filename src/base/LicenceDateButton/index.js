@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Field from '../Field'
+// import PropTypes from 'prop-types'
 import { Pencil } from 'icons'
 
 import './style.css'
@@ -23,7 +22,7 @@ class LicenceDateButton extends React.Component {
   }
 
   render() {
-    const { date, momentDate, licenceClass, setDate } = this.props
+    const { date, momentDate, licenceClass } = this.props
     return (
       <div className={licenceClass ? 'LicenceDateButton' : 'LicenceDateButton NoLicence'}>
         <span>{date}</span>
