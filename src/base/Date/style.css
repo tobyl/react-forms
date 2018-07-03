@@ -6,14 +6,23 @@
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.2);
 }
 
+.DatePicker th {
+  display: inline-block;
+  width: 35px;
+  margin: 3px 2px;
+}
+
 .DatePicker td {
+  display: inline-block;
   background: #fff;
-  color: #777;
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
+  color: #666;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
   text-align: center;
-  border-radius: 1rem;
+  border-radius: 17px;
+  margin: 3px 2px;
+  font-size: 0.85rem;
 }
 
 .DatePicker .Day:hover {
@@ -27,17 +36,16 @@
 }
 
 .DatePicker .Day.Today {
-  background: #d3d3d3;
-  color: #666;
+  background: #f1f1f1;
 }
 
 .DatePicker .Day.Weekend {
-  color: #999;
+  color: #bbb;
 }
 
 .DatePicker .Day.Selected {
-  background: #e1e1e1;
-  color: #666;
+  box-shadow: 0 0 0 1px #bbb;
+  background: red;
 }
 
 .DatePicker .Day.OutsideCurrentMonth {
@@ -50,7 +58,6 @@
 .MonthNav {
   position: relative;
   margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
   text-align: center;
   line-height: 30px;
 }
@@ -74,9 +81,9 @@
 }
 
 .MonthNav .Prev {
-  left: 0;
+  left: 0.25rem;
 }
 
 .MonthNav .Next {
-  right: 0;
+  right: 0.25rem;
 }

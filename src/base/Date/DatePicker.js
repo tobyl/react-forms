@@ -9,7 +9,7 @@ moment.locale('en-CA', {
 
 class DatePicker extends React.Component {
   state = {
-    date: moment()
+    date: moment(),
   }
 
   displayMonth = (date) => {
@@ -53,7 +53,7 @@ class DatePicker extends React.Component {
             key={i}
             day={day}
             currentMonth={currentMonth}
-            isSelected={day.startOf('day').isSame(this.state.date.startOf('day'))}
+            selectedDate={this.props.getValue(this.props.name)}
             dayClick={this.dayClick}
           />
         ))}

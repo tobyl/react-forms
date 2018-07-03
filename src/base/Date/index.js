@@ -16,7 +16,7 @@ class Date extends React.Component {
     const { error } = this.props
     return (
       <React.Fragment>
-        <DatePicker setDate={this.setDate} />
+        <DatePicker setDate={this.setDate} getValue={this.props.getValue}  name={this.props.name} />
         {error && <div className="field-error">{error}</div>}
       </React.Fragment>
     )
