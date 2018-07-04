@@ -12,7 +12,8 @@ class FormNav extends React.Component {
 
   getIndex = () => {
     const { routes } = this.props
-    const current = window.location.pathname.replace('/vehicle-add/', '')
+    let path = this.props.match.path
+    const current = window.location.pathname.replace(`${path}/`, '')
     return routes.indexOf(current)
   }
 
