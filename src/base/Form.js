@@ -106,7 +106,7 @@ const Form = (Component) => {
             cleanField: this.cleanField,
           }}>
             <form>
-              <Route path="/vehicle-add/:formStep" render={(matchProps) =>
+              <Route path={`${this.props.match.path}/:formStep`} render={(matchProps) =>
                 <Component
                   formData={this.state.formData}
                   setRoute={this.setRoute}
