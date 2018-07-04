@@ -9,14 +9,8 @@ import './forms.css'
 export const formContext = React.createContext()
 
 const initialData = { // eslint-disable-line no-unused-vars
-  vehicle_driver: '02',
-  '0x0001': false,
-  '0x0002': true,
-  requester_name: '01',
-  effective_date: '2018-07-01',
-  vehicle_usage: 'commuting',
-  annual_kms: '121',
-  daily_kms: '21',
+  out_of_province_history: false,
+  drivers_licence_number: 'L12345678900807',
 }
 
 const Form = (Component) => {
@@ -24,7 +18,7 @@ const Form = (Component) => {
     constructor(props) {
       super(props)
       this.state = {
-        formData: {}, // initialData,
+        formData: initialData,
         errors: {},
       }
       this.routes = []

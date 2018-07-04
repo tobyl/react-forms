@@ -3,34 +3,43 @@ import moment from 'moment'
 import Fieldset from 'base/Fieldset'
 import LicenceDateButton from 'base/LicenceDateButton'
 import Date from 'base/Date'
+import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
+import { calculateDates } from './calculateDates'
 
 class LicenceDates extends React.Component {
   constructor(props) {
     super(props)
-    let dob = moment('2000-05-01')
+    let dob = moment('1977-08-07')
     this.state = {
       dob: dob.clone(),
       province: 'ON',
       oop: false,
       tierInProgress: '',
       modalActive: false,
-      dates: {
-        t1: this.calculateT1(dob),
-        t2: this.calculateT2(dob),
-        t3: this.calculateT3(dob),
-      }
+      dates: [],
     }
   }
 
   componentDidMount() {
-    // const licence = this.props.getValue('licence_class')
-    // this.datesChange(licence)
+    setTimeout(() => {
+      this.fetchDates()
+    }, 1100)
   }
 
-  datesChange = () => {
-    console.log('something changed...', this.state)
+  fetchDates = (t1 = null, t2 = null, t3 = null) => {
+
+    let training = this.props.getValue('driver_training')
+    let oop = this.props.getValue('out_of_province_history')
+
+    let dates = calculateDates(this.state.dob, training, oop)
+
+    this.setState({ dates }, () => {
+      dates.t1 && this.props.update('t1_date', dates.t1.format('YYYY-MM-DD'))
+      dates.t2 && this.props.update('t2_date', dates.t2.format('YYYY-MM-DD'))
+      this.props.update('t3_date', dates.t3.format('YYYY-MM-DD'))
+    })
   }
 
   licenceClick = (tier) => {
@@ -40,75 +49,24 @@ class LicenceDates extends React.Component {
     })
   }
 
-  toggleWarning = () => this.setState({ warningPresent: !this.state.warningPresent })
-
-  calculateT3 = (dob) => {
-    return dob.clone().add(16, 'years').add(8, 'months').add(1, 'years')
-  }
-
-  calculateT2 = (dob) => {
-    return dob.clone().add(16, 'years').add(8, 'months')
-  }
-
-  calculateT1 = (dob) => {
-    return dob.clone().add(16, 'years')
-  }
-
-  getLicenceDate = (licenceYear) => {
-    if (licenceYear === this.state.dates.t1.format('YYYY')) {
-      return this.state.dates.t1
-    } else if (licenceYear === this.state.dates.t2.format('YYYY')) {
-      return this.state.dates.t2
-    } else if (licenceYear === this.state.dates.t3.format('YYYY')) {
-      return this.state.dates.t3
-    }
-  }
-
-  getLicenceTier = (licenceYear) => {
-    if (licenceYear === this.state.dates.t1.format('YYYY')) {
-      return 't1'
-    } else if (licenceYear === this.state.dates.t2.format('YYYY')) {
-      return 't2'
-    } else if (licenceYear === this.state.dates.t3.format('YYYY')) {
-      return 't3'
-    } else {
-      return false
-    }
-  }
-
-  setDate = (tier, date) => {
-    this.setState({
-      dates: {
-        ...this.state.dates,
-        [tier]: date,
-      }
-    }, () => console.log('set date: ', this.state.dates))
-  }
-
   renderDates = () => {
-    let first = this.state.dates.t1.clone().format('YYYY')
-    let last = this.state.dates.t3.clone().format('YYYY')
-    let start = Number(first)
-    let end = Number(last)
-    let years = []
-    while (start < end + 2) {
-      years.push(start.toString())
-      start++
+    if (Object.keys(this.state.dates).length > 0) {
+      return (
+        <div className="YearsContainer">
+          {Object.keys(this.state.dates).map((tier, i) =>
+            <LicenceDateButton
+              name={`${tier}_date`}
+              key={this.state.dates[tier].format('YYYY-MM-DD')}
+              date={this.state.dates[tier]}
+              licenceClass={tier}
+              licenceClick={this.licenceClick}
+            />
+          )}
+        </div>
+      )
+    } else {
+      return <Spinner />
     }
-    return (
-      <div className="YearsContainer">
-        {years.map(k =>
-          <LicenceDateButton
-            name={`${this.getLicenceTier(k)}_date`}
-            key={k}
-            date={k}
-            momentDate={this.getLicenceDate(k)}
-            licenceClass={this.getLicenceTier(k)}
-            licenceClick={this.licenceClick}
-          />
-        )}
-      </div>
-    )
   }
 
   render() {
@@ -117,7 +75,6 @@ class LicenceDates extends React.Component {
         <Toggle
           name="driver_training"
           toggleLabel="Do you have a driver training certificate?"
-          changeCallback={this.datesChange}
         />
         {this.renderDates()}
         <Modal show={this.state.modalActive} toggle={this.licenceClick}>

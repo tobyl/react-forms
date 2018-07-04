@@ -3,7 +3,11 @@ import Fieldset from 'base/Fieldset'
 import Text from 'base/Text'
 import Select from 'base/Select'
 import Toggle from 'base/Toggle'
-import { relationshipChoices, maritalChoices } from 'helpers'
+import {
+  relationshipChoices,
+  maritalChoices,
+  authChoices,
+} from 'helpers'
 
 class DriverDetails extends React.Component {
   state = { firstName: '' }
@@ -47,7 +51,7 @@ class DriverDetails extends React.Component {
         <Select
           name="authorization_status"
           label={`Should ${firstName || 'the driver'} be allowed to call in and discuss your insurance policy?`}
-          choices={relationshipChoices}
+          choices={authChoices}
         />
       </fieldset>
     )
