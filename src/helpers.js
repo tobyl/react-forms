@@ -21,7 +21,14 @@ export const provinces = [
 ]
 
 export const vehicleCondition = [
-      ['new', 'New'],
-      ['used', 'Used'],
-      ['demo', 'Demo'],
-    ]
+  ['new', 'New'],
+  ['used', 'Used'],
+  ['demo', 'Demo'],
+]
+
+export const requesterName = [
+  ['01', 'John Doe'],
+  ['02', 'Jane Doe'],
+  ['03', 'Elizabeth Doe'],
+  ['other', 'Other']
+]

@@ -2,6 +2,7 @@ let consts = {
   // get started
   request_policies: 'Policies to include in this request',
   requester_name: 'Requester Name',
+  requester_name_other: 'Requester Name (other)',
   effective_date: 'Effective Date',
   // vin lookup
   vin_lookup: 'VIN Number',

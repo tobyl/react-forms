@@ -3,6 +3,7 @@ import moment from 'moment'
 import Fieldset from 'base/Fieldset'
 import Toggle from 'base/Toggle'
 import Select from 'base/Select'
+import Text from 'base/Text'
 import Date from 'base/Date'
 
 const policies = [
@@ -11,6 +12,15 @@ const policies = [
 ]
 
 class GetStarted extends React.Component {
+  state = { other: false }
+
+  toggleOtherField = () => {
+    let isOther = this.props.getValue('requester_name') === 'other'
+    this.setState({ other: isOther }, () =>
+      !isOther && this.props.destroy('requester_name_other')
+    )
+  }
+
   render() {
     return (
       <fieldset>
@@ -28,7 +38,13 @@ class GetStarted extends React.Component {
           name="requester_name"
           label="Who is requesting this change?"
           choices={this.props.drivers}
+          changeCallback={this.toggleOtherField}
         />
+        {this.state.other &&
+          <Text
+            name="requester_name_other"
+            label="Requester Name"
+          />}
         <Date
           name="effective_date"
           label="Effective Date"
