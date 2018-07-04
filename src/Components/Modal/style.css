@@ -8,7 +8,7 @@
   opacity: 0;
   background: rgba(0,0,0,0.5);
   animation-name: fillOut;
-  animation-duration: 0.25s;
+  animation-duration: 0.15s;
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
@@ -20,13 +20,26 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: inline-block;
-  border: 1px solid #999;
   padding: 0.75rem;
   background: #fff;
+  box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.25);
 }
 
-.Modal .ModalBody h4 {
-  margin: 0 0 0.5rem 0;
+.Modal .ModalBody button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.Modal .ModalBody button svg {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
 }
 
 @keyframes fillOut {

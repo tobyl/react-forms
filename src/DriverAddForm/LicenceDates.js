@@ -1,8 +1,8 @@
 import React from 'react'
 import moment from 'moment'
-import Modal from 'Components/Modal'
 import Fieldset from 'base/Fieldset'
 import LicenceDateButton from 'base/LicenceDateButton'
+import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
 
 class LicenceDates extends React.Component {
@@ -13,8 +13,8 @@ class LicenceDates extends React.Component {
       dob: dob.clone(),
       province: 'ON',
       oop: false,
-      modal: false,
       tierInProgress: '',
+      modalActive: false,
       dates: {
         t1: this.calculateT1(dob),
         t2: this.calculateT2(dob),
@@ -26,13 +26,6 @@ class LicenceDates extends React.Component {
   componentDidMount() {
     // const licence = this.props.getValue('licence_class')
     // this.datesChange(licence)
-  }
-
-  toggleModal = (tier = '') => {
-    this.setState({
-      modal: !this.state.modal,
-      tierInProgress: tier,
-    })
   }
 
   datesChange = () => {
@@ -101,7 +94,6 @@ class LicenceDates extends React.Component {
             date={k}
             momentDate={this.getLicenceDate(k)}
             licenceClass={this.getLicenceTier(k)}
-            toggleModal={this.toggleModal}
             changeCallback={this.datesChange}
           />
         )}
@@ -119,11 +111,9 @@ class LicenceDates extends React.Component {
         />
         <p className="fieldset-label">Here are the dates we believe should be accurate for your G1, G2 and G licences. If the dates are incorrect, please click each date to make a change.</p>
         {this.renderDates()}
-        {this.state.modal &&
-          <Modal
-            toggleModal={this.toggleModal}
-            tierInProgress={this.state.tierInProgress}
-          />}
+        <Modal show={this.state.modalActive}>
+          something!
+        </Modal>
       </fieldset>
     )
   }

@@ -18,7 +18,6 @@ class LicenceDateButton extends React.Component {
 
   dateClick = (e) => {
     e.preventDefault()
-    this.props.toggleModal(this.props.licenceClass)
   }
 
   render() {
@@ -28,7 +27,7 @@ class LicenceDateButton extends React.Component {
         <span>{date}</span>
         <button onClick={this.dateClick}>
           <span>{this.getLicenceClass(licenceClass)}</span>
-          <strong>{momentDate && momentDate.format('MMMM Do YYYY')}</strong>
+          <strong>{momentDate && momentDate.format('MMMM Do, YYYY')}</strong>
           <Pencil />
         </button>
       </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import Form from 'base/Form'
 import GetStarted from 'base/common/GetStarted'
-import LicenceDates from './LicenceDates'
 import VinLookup from './VinLookup'
 import PrincipalDriver from './PrincipalDriver'
 import VehicleDetails from './VehicleDetails'
@@ -15,7 +14,6 @@ class VehicleAddForm extends React.Component {
     return (
       <div>
         <GetStarted drivers={requesterName} />
-        <LicenceDates />
         <VinLookup />
         <PrincipalDriver drivers={requesterName} />
         <VehicleDetails />
