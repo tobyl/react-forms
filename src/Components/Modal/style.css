@@ -25,21 +25,33 @@
   box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.25);
 }
 
-.Modal .ModalBody button {
+.Modal .ModalBody .ModalClose {
   position: absolute;
   top: -15px;
   right: -15px;
   appearance: none;
   width: 30px;
   height: 30px;
+  border: none;
   border-radius: 20px;
   text-align: center;
+  outline: none;
+  background-color: #444;
 }
 
-.Modal .ModalBody button svg {
+.Modal .ModalBody .ModalClose svg {
   width: 15px;
   height: 15px;
   vertical-align: middle;
+}
+
+.Modal .ModalBody .ModalClose svg path {
+  fill: #fff;
+}
+
+.Modal .ModalBody .ModalClose:hover {
+  background-color: #666;
+  cursor: pointer;
 }
 
 @keyframes fillOut {

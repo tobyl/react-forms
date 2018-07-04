@@ -32,3 +32,24 @@ export const requesterName = [
   ['03', 'Elizabeth Doe'],
   ['other', 'Other']
 ]
+
+export const relationshipChoices = [
+  ['spouse', 'Spouse'],
+  ['child', 'Child'],
+  ['relative', 'Relative'],
+  ['employee', 'Employee'],
+  ['other', 'Other'],
+]
+
+export const maritalChoices = [
+  ['s', 'Single'],
+  ['m', 'Married'],
+  ['w', 'Widowed'],
+  ['d', 'Divorced'],
+]
+
+export const authChoices = [
+  ['no', 'No'],
+  ['inquiries_only', 'Yes, Inquiries only'],
+  ['inquiries_and_changes', 'Yes, Inquiries & Changes'],
+]

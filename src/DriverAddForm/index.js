@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from 'base/Form'
 import GetStarted from 'base/common/GetStarted'
+import DriverDetails from './DriverDetails'
 import LicenceDates from './LicenceDates'
 import ConfirmPage from 'base/ConfirmPage'
 import { requesterName } from 'helpers'
@@ -10,6 +11,7 @@ class DriverAddForm extends React.Component {
     return (
       <div>
         <GetStarted drivers={requesterName} />
+        <DriverDetails />
         <LicenceDates />
         <ConfirmPage />
       </div>

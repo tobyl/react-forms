@@ -40,6 +40,8 @@ class LicenceDates extends React.Component {
     })
   }
 
+  toggleWarning = () => this.setState({ warningPresent: !this.state.warningPresent })
+
   calculateT3 = (dob) => {
     return dob.clone().add(16, 'years').add(8, 'months').add(1, 'years')
   }
@@ -94,7 +96,7 @@ class LicenceDates extends React.Component {
       start++
     }
     return (
-      <div className="YearContainer">
+      <div className="YearsContainer">
         {years.map(k =>
           <LicenceDateButton
             name={`${this.getLicenceTier(k)}_date`}
@@ -111,19 +113,18 @@ class LicenceDates extends React.Component {
 
   render() {
     return (
-      <fieldset className="DriverLicensing">
+      <fieldset className="LicenceDates">
         <Toggle
           name="driver_training"
           toggleLabel="Do you have a driver training certificate?"
           changeCallback={this.datesChange}
         />
-        <p className="fieldset-label">
-          Here are the dates we believe should be accurate for your G1, G2 and G licences. If the dates are incorrect, please click each date to make a change.
-        </p>
         {this.renderDates()}
         <Modal show={this.state.modalActive} toggle={this.licenceClick}>
+          <h4>Please set your {this.state.tierInProgress} licence</h4>
           <Date
             name={`${this.state.tierInProgress}_date`}
+            maxDate={moment().startOf('day')}
           />
         </Modal>
       </fieldset>
