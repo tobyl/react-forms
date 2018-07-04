@@ -18,6 +18,7 @@ class LicenceDateButton extends React.Component {
 
   dateClick = (e) => {
     e.preventDefault()
+    this.props.licenceClick(this.props.licenceClass)
   }
 
   render() {
