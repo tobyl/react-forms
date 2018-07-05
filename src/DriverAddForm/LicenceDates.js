@@ -13,7 +13,7 @@ class LicenceDates extends React.Component {
     super(props)
     let dob = moment('1977-08-07')
     this.state = {
-      dob: dob.clone(),
+      dob: dob,
       province: 'ON',
       oop: false,
       tierInProgress: '',
@@ -30,24 +30,24 @@ class LicenceDates extends React.Component {
 
   fetchDates = (date = null) => {
 
-    console.log('fetching: ', date)
+    let training = this.props.getValue('driver_training')
+    let oop = this.props.getValue('out_of_province_history')
 
-    const { update, destroy } = this.props
-    let licence = this.props.getValue('drivers_licence_number')
+    let dates = {}
 
-    if (licence) {
-      let training = this.props.getValue('driver_training')
-      let oop = this.props.getValue('out_of_province_history')
-      let dob = extractDobFromLicence(licence)
-
-      let dates = calculateDates(moment(dob), training, oop, this.state.tierInProgress, date)
-
-      this.setState({ dates }, () => {
-        dates.t1 ? update('t1_date', dates.t1.format('YYYY-MM-DD')) : destroy('t1_date')
-        dates.t2 ? update('t2_date', dates.t2.format('YYYY-MM-DD')) : destroy('t2_date')
-        dates.t3 ? update('t3_date', dates.t3.format('YYYY-MM-DD')) : destroy('t3_date')
-      })
+    if (Object.keys(this.state.dates).length < 1) {
+      dates = calculateDates(this.state.dob, training, oop)
+    } else {
+      dates = calculateDates(this.state.dob, training, oop, this.state.tierInProgress, date)
     }
+
+    console.log('got back: ', dates)
+
+    this.setState({ dates }, () => {
+      dates.t1 && this.props.update('t1_date', dates.t1.format('YYYY-MM-DD'))
+      dates.t2 && this.props.update('t2_date', dates.t2.format('YYYY-MM-DD'))
+      dates.t3 && this.props.update('t3_date', dates.t3.format('YYYY-MM-DD'))
+    })
 
   }
 
@@ -92,6 +92,7 @@ class LicenceDates extends React.Component {
           <h4>Please set your {tierInProgress} licence</h4>
           <NewDate
             name={`${tierInProgress}_date`}
+            minDate={this.state.dob.clone().add(16, 'years')}
             maxDate={moment().startOf('day')}
             showYear={true}
             displayDate={dates[tierInProgress]}
