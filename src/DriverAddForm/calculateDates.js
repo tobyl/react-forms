@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { twoDigitYearToFour } from 'services'
 
-export const calculateDates = (dob, training, oop) => {
+export const calculateDates = (dob, training, oop, tierInProgress = null, date = null) => {
   let gdlDate = moment('1994-04-01')
 
   let dates = {}
@@ -12,6 +12,10 @@ export const calculateDates = (dob, training, oop) => {
     dates['t3'] = dates['t2'].clone().add(1, 'years')
   } else {
     dates['t3'] = dob.clone().add(16, 'years')
+  }
+
+  if (tierInProgress && date) {
+    dates[tierInProgress] = moment(date)
   }
 
   return dates
@@ -35,9 +39,4 @@ export const extractDobFromLicence = (licence) => {
   }
 
   return dateOfBirth
-}
-
-export const extractGenderFromLicence = (licence) => {
-  // expects a valid licence number
-
 }

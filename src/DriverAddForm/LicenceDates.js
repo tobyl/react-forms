@@ -28,9 +28,9 @@ class LicenceDates extends React.Component {
     }, 1100)
   }
 
-  fetchDates = (tier = null) => {
+  fetchDates = (date = null) => {
 
-    console.log('fetching - tier: ', tier)
+    console.log('fetching: ', date)
 
     const { update, destroy } = this.props
     let licence = this.props.getValue('drivers_licence_number')
@@ -40,7 +40,7 @@ class LicenceDates extends React.Component {
       let oop = this.props.getValue('out_of_province_history')
       let dob = extractDobFromLicence(licence)
 
-      let dates = calculateDates(moment(dob), training, oop)
+      let dates = calculateDates(moment(dob), training, oop, this.state.tierInProgress, date)
 
       this.setState({ dates }, () => {
         dates.t1 ? update('t1_date', dates.t1.format('YYYY-MM-DD')) : destroy('t1_date')
@@ -69,7 +69,7 @@ class LicenceDates extends React.Component {
               date={this.state.dates[tier]}
               licenceClass={tier}
               licenceClick={this.licenceClick}
-              changeCallback={() => this.fetchDates(tier, this.state.dates[tier])}
+              changeCallback={this.fetchDates}
             />
           )}
         </div>
@@ -95,6 +95,7 @@ class LicenceDates extends React.Component {
             maxDate={moment().startOf('day')}
             showYear={true}
             displayDate={dates[tierInProgress]}
+            changeCallback={this.fetchDates}
           />
         </Modal>
       </fieldset>
