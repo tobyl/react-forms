@@ -6,7 +6,7 @@ import Date from 'base/Date'
 import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
-import { calculateDates } from './calculateDates'
+import { calculateDates, extractDobFromLicence } from './calculateDates'
 
 class LicenceDates extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class LicenceDates extends React.Component {
       oop: false,
       tierInProgress: '',
       modalActive: false,
-      dates: [],
+      dates: {},
     }
   }
 
@@ -28,18 +28,27 @@ class LicenceDates extends React.Component {
     }, 1100)
   }
 
-  fetchDates = (t1 = null, t2 = null, t3 = null) => {
+  fetchDates = (tier = null, date = null) => {
 
-    let training = this.props.getValue('driver_training')
-    let oop = this.props.getValue('out_of_province_history')
+    console.log('tier: ', tier, date)
 
-    let dates = calculateDates(this.state.dob, training, oop)
+    const { update, destroy } = this.props
+    let licence = this.props.getValue('drivers_licence_number')
 
-    this.setState({ dates }, () => {
-      dates.t1 && this.props.update('t1_date', dates.t1.format('YYYY-MM-DD'))
-      dates.t2 && this.props.update('t2_date', dates.t2.format('YYYY-MM-DD'))
-      this.props.update('t3_date', dates.t3.format('YYYY-MM-DD'))
-    })
+    if (licence) {
+      let training = this.props.getValue('driver_training')
+      let oop = this.props.getValue('out_of_province_history')
+      let dob = extractDobFromLicence(licence)
+
+      let dates = calculateDates(moment(dob), training, oop)
+
+      this.setState({ dates }, () => {
+        dates.t1 ? update('t1_date', dates.t1.format('YYYY-MM-DD')) : destroy('t1_date')
+        dates.t2 ? update('t2_date', dates.t2.format('YYYY-MM-DD')) : destroy('t2_date')
+        dates.t3 ? update('t3_date', dates.t3.format('YYYY-MM-DD')) : destroy('t3_date')
+      })
+    }
+
   }
 
   licenceClick = (tier) => {
@@ -60,6 +69,7 @@ class LicenceDates extends React.Component {
               date={this.state.dates[tier]}
               licenceClass={tier}
               licenceClick={this.licenceClick}
+              changeCallback={() => this.fetchDates(tier, this.state.dates[tier])}
             />
           )}
         </div>
@@ -82,6 +92,7 @@ class LicenceDates extends React.Component {
           <Date
             name={`${this.state.tierInProgress}_date`}
             maxDate={moment().startOf('day')}
+            changeCallback={() => this.fetchDates(this.state.tierInProgress, this.state.dates[this.state.tierInProgress])}
           />
         </Modal>
       </fieldset>

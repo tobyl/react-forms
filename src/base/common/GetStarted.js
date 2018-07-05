@@ -4,7 +4,7 @@ import Fieldset from 'base/Fieldset'
 import Toggle from 'base/Toggle'
 import Select from 'base/Select'
 import Text from 'base/Text'
-import Date from 'base/Date'
+import NewDate from 'base/NewDate'
 
 const policies = [
   ['0x000001', '0x000001'],
@@ -45,9 +45,10 @@ class GetStarted extends React.Component {
             name="requester_name_other"
             label="Requester Name"
           />}
-        <Date
+        <NewDate
           name="effective_date"
           label="Effective Date"
+          selected={moment('2018-01-01')}
           minDate={moment().startOf('day')}
           maxDate={moment().startOf('day').add(1, 'month')}
         />

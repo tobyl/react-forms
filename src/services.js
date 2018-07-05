@@ -72,3 +72,18 @@ export function isValidVin(value) {
   }
   return true
 }
+
+export function twoDigitYearToFour(year) {
+  year = year.toString()
+
+  const currentBaseYear = new Date().getFullYear().toString().substr(2,2);
+  const currentLicenceYear = Number(currentBaseYear) - 16;
+
+  if (Number(year) > currentLicenceYear) {
+    year = `19${year}`;
+  } else {
+    year = `20${year}`;
+  }
+
+  return year;
+}
