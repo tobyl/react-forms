@@ -12,9 +12,7 @@ import { licenceGroup } from './licenceGroup'
 class LicenceDates extends React.Component {
   constructor(props) {
     super(props)
-    let dob = moment('1977-08-07')
     this.state = {
-      dob: dob.clone(),
       province: 'ON',
       oop: false,
       tierInProgress: '',
@@ -29,11 +27,16 @@ class LicenceDates extends React.Component {
     }, 1100)
   }
 
-  fetchDates = (date = null) => {
+  getDob = () => {
     let licence = this.props.getValue('drivers_licence_number')
+    return moment(extractDobFromLicence(licence))
+  }
+
+  fetchDates = (date = null) => {
+
 
     let group = new licenceGroup(
-      extractDobFromLicence(licence), // dob
+      this.getDob(), // dob
       this.props.getValue('driver_training'), // driver training
       this.props.getValue('out_of_province_history'), // oop
       this.state.tierInProgress, // tierInProgress
@@ -41,7 +44,6 @@ class LicenceDates extends React.Component {
     )
 
     this.setState({ dates: group.allDates() }, () => {
-      console.log('calling update: ', group.t1())
       group.t1() && this.props.update('t1_date', group.t1().format('YYYY-MM-DD'))
       group.t2() && this.props.update('t2_date', group.t2().format('YYYY-MM-DD'))
       group.t3() && this.props.update('t3_date', group.t3().format('YYYY-MM-DD'))
@@ -91,7 +93,7 @@ class LicenceDates extends React.Component {
           <h4>Please set your {tierInProgress} licence</h4>
           <NewDate
             name={`${tierInProgress}_date`}
-            minDate={this.state.dob.clone().add(16, 'years')}
+            minDate={this.getDob().clone().add(16, 'years')}
             maxDate={moment().startOf('day')}
             showYear={true}
             displayDate={dates[tierInProgress]}

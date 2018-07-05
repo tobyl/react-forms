@@ -11,40 +11,24 @@ export class licenceGroup {
       setDate: date,
     }
 
-    this.t1Date = moment()
-    this.t2Date = moment()
-    this.t3Date = moment()
+    this.t1Date = null
+    this.t2Date = null
+    this.t3Date = null
   }
-
-  calculateFromNewDate = (date) => {
-    if (date) {
-      if (this.t1Current()) {
-        console.log('we are changing t1', date)
-      }
-      if (this.t2Current()) {
-        console.log('we are changing t2')
-      }
-      if (this.t3Current()) {
-        console.log('we are changing t3')
-      }
-    }
-    return null
-  }
-
-  t1Current = () => this.date.tierInProgress === 't1'
-  t2Current = () => this.date.tierInProgress === 't2'
-  t3Current = () => this.date.tierInProgress === 't3'
 
   t1 = () => {
-    return this.dob.clone().add(16, 'years')
+    let dob = this.dob.clone()
+    return dob.add(16, 'years')
   }
 
   t2 = () => {
-    return this.t1().clone().add(8, 'months')
+    let t1 = this.t1().clone()
+    return t1.add(8, 'months')
   }
 
   t3 = () => {
-    return this.t2().clone().add(1, 'years')
+    let t2 = this.t2().clone()
+    return t2.add(1, 'years')
   }
 
   allDates = () => {
