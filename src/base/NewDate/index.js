@@ -10,35 +10,57 @@ import './style.css'
 
 class NewDate extends React.Component {
   state = {
-    date: this.props.selected || moment(),
+    displayDate: this.props.displayDate || moment(),
+    selectedDate: moment(),
+  }
+
+  componentDidUpdate() {
+    if (this.props.value) {
+      const selected = this.state.selectedDate.format('YYYY-MM-DD')
+      const nextValue = moment(this.props.value).format('YYYY-MM-DD')
+      if (selected !== nextValue) {
+        this.setState({ selectedDate: moment(this.props.value) })
+      }
+    }
+  }
+
+  setDisplayDate = (value) => {
+    this.setState({ selectedDate: value })
   }
 
   setDate = (value) => {
-    let e = { target: { value: value.format('YYYY-MM-DD') } }
+    let e = {
+      target: {
+        value: value.format('YYYY-MM-DD')
+      }
+    }
     this.setState({ date: value }, () =>
       this.props.change(e)
     )
   }
 
   render() {
-    const { error, minDate, maxDate } = this.props
-    const { date } = this.state
+    const { error, minDate, maxDate, showYear } = this.props
+    const { displayDate, selectedDate } = this.state
+
     return (
       <div className="NewDate">
-        <YearNav
-          date={date}
-          setDate={this.setDate}
-          minDate={minDate}
-          maxDate={maxDate}
-        />
+        {showYear &&
+          <YearNav
+            date={displayDate}
+            setDate={this.setDisplayDate}
+            minDate={minDate}
+            maxDate={maxDate}
+          />}
         <MonthNav
-          date={date}
-          setDate={this.setDate}
+          date={displayDate}
+          setDate={this.setDisplayDate}
           minDate={minDate}
           maxDate={maxDate}
         />
         <DatePicker
-          date={date}
+          date={displayDate}
+          selectedDate={selectedDate}
           setDate={this.setDate}
           minDate={minDate}
           maxDate={maxDate}

@@ -30,7 +30,7 @@ class Day extends React.Component {
   }
 
   render() {
-    const { date } = this.props
+    const { date, selectedDate } = this.props
     let today = moment().startOf('day')
     let isWeekend = date.format('dddd') === 'Saturday' || date.format('dddd') === 'Sunday'
 
@@ -39,6 +39,7 @@ class Day extends React.Component {
       'Today': date.clone().startOf('day').isSame(today),
       'BeforeMin': this.beforeMin(),
       'AfterMax': this.afterMax(),
+      'Selected': selectedDate.format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
     })
 
     return (

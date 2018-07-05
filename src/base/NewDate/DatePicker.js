@@ -19,7 +19,7 @@ class DatePicker extends React.Component {
 
   displayWeek = (week) => {
 
-    const { date, minDate, maxDate, setDate } = this.props
+    const { date, minDate, maxDate, setDate, selectedDate } = this.props
 
     var startOfWeek = date.clone().week(week).startOf('isoWeek')
     var endOfWeek = date.clone().week(week).endOf('isoWeek')
@@ -38,6 +38,7 @@ class DatePicker extends React.Component {
           <Day
             key={i}
             date={day}
+            selectedDate={selectedDate}
             minDate={minDate}
             maxDate={maxDate}
             setDate={setDate}

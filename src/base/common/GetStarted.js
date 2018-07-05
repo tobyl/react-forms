@@ -48,7 +48,6 @@ class GetStarted extends React.Component {
         <NewDate
           name="effective_date"
           label="Effective Date"
-          selected={moment('2018-01-01')}
           minDate={moment().startOf('day')}
           maxDate={moment().startOf('day').add(1, 'month')}
         />
