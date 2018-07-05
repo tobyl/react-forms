@@ -7,13 +7,14 @@ import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
 import { calculateDates, extractDobFromLicence } from './calculateDates'
+import { licenceGroup } from './licenceGroup'
 
 class LicenceDates extends React.Component {
   constructor(props) {
     super(props)
     let dob = moment('1977-08-07')
     this.state = {
-      dob: dob,
+      dob: dob.clone(),
       province: 'ON',
       oop: false,
       tierInProgress: '',
@@ -30,23 +31,21 @@ class LicenceDates extends React.Component {
 
   fetchDates = (date = null) => {
 
-    let training = this.props.getValue('driver_training')
-    let oop = this.props.getValue('out_of_province_history')
+    let licence = this.props.getValue('drivers_licence_number')
 
-    let dates = {}
+    let group = new licenceGroup(
+      extractDobFromLicence(licence),
+      this.props.getValue('driver_training'),
+      this.props.getValue('out_of_province_history'),
+      this.state.tierInProgress,
+      Object.keys(this.state.dates).length < 1,
+      date,
+    )
 
-    if (Object.keys(this.state.dates).length < 1) {
-      dates = calculateDates(this.state.dob, training, oop)
-    } else {
-      dates = calculateDates(this.state.dob, training, oop, this.state.tierInProgress, date)
-    }
-
-    console.log('got back: ', dates)
-
-    this.setState({ dates }, () => {
-      dates.t1 && this.props.update('t1_date', dates.t1.format('YYYY-MM-DD'))
-      dates.t2 && this.props.update('t2_date', dates.t2.format('YYYY-MM-DD'))
-      dates.t3 && this.props.update('t3_date', dates.t3.format('YYYY-MM-DD'))
+    this.setState({ dates: group.allDates() }, () => {
+      group.t1() && this.props.update('t1_date', group.t1().format('YYYY-MM-DD'))
+      group.t2() && this.props.update('t2_date', group.t2().format('YYYY-MM-DD'))
+      group.t3() && this.props.update('t3_date', group.t3().format('YYYY-MM-DD'))
     })
 
   }
@@ -86,6 +85,7 @@ class LicenceDates extends React.Component {
         <Toggle
           name="driver_training"
           toggleLabel="Do you have a driver training certificate?"
+          changeCallback={this.fetchDates}
         />
         {this.renderDates()}
         <Modal show={modalActive} toggle={this.licenceClick}>
