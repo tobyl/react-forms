@@ -6,7 +6,7 @@ import NewDate from 'base/NewDate'
 import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
-import { extractDobFromLicence } from './calculateDates'
+import { extractDobFromLicence } from './licenceServices'
 import { licenceGroup } from './licenceGroup'
 
 class LicenceDates extends React.Component {
