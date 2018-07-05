@@ -1,11 +1,13 @@
 import React from 'react'
 import moment from 'moment'
+import { SelectChevron } from 'icons'
 
 class YearNav extends React.Component {
   getYears = () => {
+    const { minDate, maxDate } = this.props
     let years = []
-    let start = this.props.minDate.clone() || moment('1900-01-01')
-    let end = this.props.maxDate.clone() || moment()
+    let start = minDate ? minDate.clone() : moment('1900-01-01')
+    let end = maxDate ? maxDate.clone() : moment()
 
     let yr = start
 
@@ -25,13 +27,14 @@ class YearNav extends React.Component {
   render() {
     const  { date } = this.props
     return (
-      <div className="YearNav">
+      <div className="YearNav" style={{ position: 'relative' }}>
         <select value={date.format('YYYY')} onChange={this.yearChange}>
           <option>Select…</option>
           {this.getYears().map(yr =>
             <option key={yr} value={yr}>{yr}</option>
           )}
         </select>
+        <SelectChevron />
       </div>
     )
   }

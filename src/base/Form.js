@@ -11,7 +11,7 @@ export const formContext = React.createContext()
 const initialData = { // eslint-disable-line no-unused-vars
   out_of_province_history: false,
   drivers_licence_number: 'L12345678900807',
-  effective_date: '2018-07-12',
+  effective_date: '2017-12-12',
 }
 
 const Form = (Component) => {

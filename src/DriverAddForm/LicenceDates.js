@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Fieldset from 'base/Fieldset'
 import LicenceDateButton from 'base/LicenceDateButton'
-import Date from 'base/Date'
+import NewDate from 'base/NewDate'
 import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
@@ -28,9 +28,9 @@ class LicenceDates extends React.Component {
     }, 1100)
   }
 
-  fetchDates = (tier = null, date = null) => {
+  fetchDates = (tier = null) => {
 
-    console.log('tier: ', tier, date)
+    console.log('fetching - tier: ', tier)
 
     const { update, destroy } = this.props
     let licence = this.props.getValue('drivers_licence_number')
@@ -80,6 +80,7 @@ class LicenceDates extends React.Component {
   }
 
   render() {
+    const { modalActive, tierInProgress, dates } = this.state
     return (
       <fieldset className="LicenceDates">
         <Toggle
@@ -87,12 +88,13 @@ class LicenceDates extends React.Component {
           toggleLabel="Do you have a driver training certificate?"
         />
         {this.renderDates()}
-        <Modal show={this.state.modalActive} toggle={this.licenceClick}>
-          <h4>Please set your {this.state.tierInProgress} licence</h4>
-          <Date
-            name={`${this.state.tierInProgress}_date`}
+        <Modal show={modalActive} toggle={this.licenceClick}>
+          <h4>Please set your {tierInProgress} licence</h4>
+          <NewDate
+            name={`${tierInProgress}_date`}
             maxDate={moment().startOf('day')}
-            changeCallback={() => this.fetchDates(this.state.tierInProgress, this.state.dates[this.state.tierInProgress])}
+            showYear={true}
+            displayDate={dates[tierInProgress]}
           />
         </Modal>
       </fieldset>
