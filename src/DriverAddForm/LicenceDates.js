@@ -6,7 +6,7 @@ import NewDate from 'base/NewDate'
 import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
-import { calculateDates, extractDobFromLicence } from './calculateDates'
+import { extractDobFromLicence } from './calculateDates'
 import { licenceGroup } from './licenceGroup'
 
 class LicenceDates extends React.Component {
@@ -30,19 +30,18 @@ class LicenceDates extends React.Component {
   }
 
   fetchDates = (date = null) => {
-
     let licence = this.props.getValue('drivers_licence_number')
 
     let group = new licenceGroup(
-      extractDobFromLicence(licence),
-      this.props.getValue('driver_training'),
-      this.props.getValue('out_of_province_history'),
-      this.state.tierInProgress,
-      Object.keys(this.state.dates).length < 1,
-      date,
+      extractDobFromLicence(licence), // dob
+      this.props.getValue('driver_training'), // driver training
+      this.props.getValue('out_of_province_history'), // oop
+      this.state.tierInProgress, // tierInProgress
+      date, // date just set
     )
 
     this.setState({ dates: group.allDates() }, () => {
+      console.log('calling update: ', group.t1())
       group.t1() && this.props.update('t1_date', group.t1().format('YYYY-MM-DD'))
       group.t2() && this.props.update('t2_date', group.t2().format('YYYY-MM-DD'))
       group.t3() && this.props.update('t3_date', group.t3().format('YYYY-MM-DD'))

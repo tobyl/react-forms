@@ -1,15 +1,14 @@
 import moment from 'moment'
 
 export class licenceGroup {
-  constructor(dob, training, oop, tierInProgress, firstRun, date = null) {
+  constructor(dob, training, oop, tierInProgress, date = null) {
     this.dob = moment(dob)
     this.training = training
     this.oop = oop
-    this.tierInProgress = tierInProgress
-    this.firstRun = firstRun
 
-    if (date) {
-      this.date = this.calculateFromNewDate(date)
+    this.date = {
+      tier: tierInProgress,
+      setDate: date,
     }
 
     this.t1Date = moment()
@@ -18,8 +17,23 @@ export class licenceGroup {
   }
 
   calculateFromNewDate = (date) => {
-    console.log('calculating from new date ', date, this.tierInProgress)
+    if (date) {
+      if (this.t1Current()) {
+        console.log('we are changing t1', date)
+      }
+      if (this.t2Current()) {
+        console.log('we are changing t2')
+      }
+      if (this.t3Current()) {
+        console.log('we are changing t3')
+      }
+    }
+    return null
   }
+
+  t1Current = () => this.date.tierInProgress === 't1'
+  t2Current = () => this.date.tierInProgress === 't2'
+  t3Current = () => this.date.tierInProgress === 't3'
 
   t1 = () => {
     return this.dob.clone().add(16, 'years')

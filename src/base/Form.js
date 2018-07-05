@@ -37,7 +37,7 @@ const Form = (Component) => {
         if (value !== '' && value !== null && value !== undefined) {
           // on mount, first run, or empty value, don't clear error
           // should there be a check for touched?
-          console.log('clearing error for ', field)
+          // console.log('clearing error for ', field)
           this.clearError(field)
         }
       })
