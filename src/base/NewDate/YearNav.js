@@ -1,11 +1,10 @@
 import React from 'react'
-import { format, addYears } from 'date-fns'
+import { format } from 'date-fns'
 import { SelectChevron } from 'icons'
 
 class YearNav extends React.Component {
   getYears = () => {
     const { minDate, maxDate } = this.props
-    let years = []
     let start = minDate ? new Date(minDate) : new Date('1900-01-01')
     let end = maxDate ? new Date(maxDate) : new Date()
 
@@ -17,8 +16,6 @@ class YearNav extends React.Component {
     for (let i = firstYear; i < lastYear + 2; i++) {
       yrs.push(i)
     }
-
-    console.log(yrs)
 
     return yrs
   }

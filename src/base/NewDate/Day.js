@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { format, isWeekend, isToday, isBefore, isAfter } from 'date-fns'
 import classNames from 'classnames'
 
 class Day extends React.Component {
@@ -13,7 +13,7 @@ class Day extends React.Component {
 
   beforeMin = () => {
     if (this.props.minDate) {
-      if (this.props.date.isBefore(this.props.minDate)) {
+      if (isBefore(this.props.date, this.props.minDate)) {
         return true
       }
     }
@@ -22,7 +22,7 @@ class Day extends React.Component {
 
   afterMax = () => {
     if (this.props.maxDate) {
-      if (this.props.date.isAfter(this.props.maxDate)) {
+      if (isAfter(this.props.date, this.props.maxDate)) {
         return true
       }
     }
@@ -31,20 +31,18 @@ class Day extends React.Component {
 
   render() {
     const { date, selectedDate } = this.props
-    let today = moment().startOf('day')
-    let isWeekend = date.format('dddd') === 'Saturday' || date.format('dddd') === 'Sunday'
 
     let cls = classNames('Day', {
-      'Weekend': isWeekend,
-      'Today': date.clone().startOf('day').isSame(today),
+      'Weekend': isWeekend(date),
+      'Today': isToday(date),
       'BeforeMin': this.beforeMin(),
       'AfterMax': this.afterMax(),
-      'Selected': selectedDate.format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
+      'Selected': format(selectedDate, 'YYYY-MM-DD') === format(date, 'YYYY-MM-DD')
     })
 
     return (
       <td className={cls} onClick={() => this.handleDayClick(date)}>
-        {date.format('D')}
+        {format(date, 'D')}
       </td>
     )
   }
