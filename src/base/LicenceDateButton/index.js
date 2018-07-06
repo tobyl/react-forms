@@ -12,7 +12,7 @@ class LicenceDateButton extends React.Component {
   }
 
   render() {
-    const { date, licenceClass, yearOnly } = this.props
+    const { date, yearOnly } = this.props
     return (
       <div className={yearOnly ? 'LicenceDateButton YearOnly' : 'LicenceDateButton'}>
         <span>

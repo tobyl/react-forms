@@ -1,22 +1,26 @@
 import React from 'react'
-import moment from 'moment'
+import { format, addYears } from 'date-fns'
 import { SelectChevron } from 'icons'
 
 class YearNav extends React.Component {
   getYears = () => {
     const { minDate, maxDate } = this.props
     let years = []
-    let start = minDate ? minDate.clone() : moment('1900-01-01')
-    let end = maxDate ? maxDate.clone() : moment()
+    let start = minDate ? new Date(minDate) : new Date('1900-01-01')
+    let end = maxDate ? new Date(maxDate) : new Date()
 
-    let yr = start
+    let firstYear = Number(format(start, 'YYYY'))
+    let lastYear = Number(format(end, 'YYYY'))
 
-    while (yr <= end) {
-      years.push(yr.format('YYYY'))
-      yr = yr.clone().add(1, 'y')
+    let yrs = []
+
+    for (let i = firstYear; i < lastYear + 2; i++) {
+      yrs.push(i)
     }
 
-    return years
+    console.log(yrs)
+
+    return yrs
   }
 
   yearChange = (e) => {
@@ -28,7 +32,7 @@ class YearNav extends React.Component {
     const  { date } = this.props
     return (
       <div className="YearNav" style={{ position: 'relative' }}>
-        <select value={date.format('YYYY')} onChange={this.yearChange}>
+        <select value={format(date, 'YYYY')} onChange={this.yearChange}>
           <option>Select…</option>
           {this.getYears().map(yr =>
             <option key={yr} value={yr}>{yr}</option>

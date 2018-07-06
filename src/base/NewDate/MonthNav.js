@@ -1,4 +1,5 @@
 import React from 'react'
+import { format } from 'date-fns'
 import { Next, Previous } from 'icons'
 
 class MonthNav extends React.Component {
@@ -17,7 +18,7 @@ class MonthNav extends React.Component {
     return (
       <div className="MonthNav">
         <button className="Prev" onClick={this.prevClick}><Previous /></button>
-        {date.format('MMMM')}
+        {format(date, 'MMMM')}
         <button className="Next" onClick={this.nextClick}><Next /></button>
       </div>
     )

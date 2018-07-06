@@ -35,7 +35,7 @@ export const getYearsArray = (dates) => {
 
     let yrs = []
 
-    for (let i = firstYear; i < lastYear + 1; i++) {
+    for (let i = firstYear; i < lastYear + 2; i++) {
       yrs.push(i)
     }
 
