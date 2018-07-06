@@ -1,13 +1,13 @@
-import moment from 'moment'
+import { addYears } from 'date-fns'
 
 export class licenceGroup {
   constructor(dob, training, oop, tierInProgress, date = null) {
-    this.dob = moment(dob)
+    this.dob = new Date(dob)
     this.training = training
     this.oop = oop
 
     this.tierInProgress = tierInProgress
-    this.date = date ? moment(date) : null
+    this.date = date ? new Date(date) : null
 
     this.t1Date = null
     this.t2Date = null
@@ -18,24 +18,21 @@ export class licenceGroup {
     if (this.tierInProgress === 't1') {
       return this.date
     }
-    let dob = this.dob.clone()
-    return dob.add(16, 'years')
+    return addYears(this.dob, 16)
   }
 
   t2 = () => {
     if (this.tierInProgress === 't2') {
       return this.date
     }
-    let t1 = this.t1().clone()
-    return t1.add(8, 'months')
+    return addYears(this.t1(), 3)
   }
 
   t3 = () => {
     if (this.tierInProgress === 't3') {
       return this.date
     }
-    let t2 = this.t2().clone()
-    return t2.add(1, 'years')
+    return addYears(this.t2(), 3)
   }
 
   allDates = () => {

@@ -11,9 +11,9 @@
   border-top: 1px solid #e1e1e1;
 }
 
-.LicenceDateButton.NoLicence button {
-  opacity: 0;
-  pointer-events: none;
+.LicenceDateButton.YearOnly {
+  clear: both;
+  min-height: 36px;
 }
 
 .LicenceDateButton > span {

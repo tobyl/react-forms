@@ -1,4 +1,5 @@
 import React from 'react'
+import { format } from 'date-fns'
 import { Pencil } from 'icons'
 
 import './style.css'
@@ -11,15 +12,17 @@ class LicenceDateButton extends React.Component {
   }
 
   render() {
-    const { date, licenceClass } = this.props
+    const { date, licenceClass, yearOnly } = this.props
     return (
-      <div className={licenceClass ? 'LicenceDateButton' : 'LicenceDateButton NoLicence'}>
-        <span>{date.format('YYYY')}</span>
-        <button onClick={this.dateClick}>
+      <div className={yearOnly ? 'LicenceDateButton YearOnly' : 'LicenceDateButton'}>
+        <span>
+          {yearOnly ? yearOnly : format(date, 'YYYY')}
+        </span>
+        {!yearOnly && <button onClick={this.dateClick}>
           <span>{this.props.licenceClass}</span>
-          <strong>{date && date.format('MMMM Do, YYYY')}</strong>
+          <strong>{format(date, 'MMMM D, YYYY')}</strong>
           <Pencil />
-        </button>
+        </button>}
       </div>
     )
   }

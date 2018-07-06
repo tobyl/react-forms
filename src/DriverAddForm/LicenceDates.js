@@ -1,12 +1,12 @@
 import React from 'react'
-import moment from 'moment'
+import { format, startOfDay, addYears } from 'date-fns'
 import Fieldset from 'base/Fieldset'
 import LicenceDateButton from 'base/LicenceDateButton'
 import NewDate from 'base/NewDate'
 import { Spinner } from 'Components/Spinner'
 import Modal from 'Components/Modal'
 import Toggle from 'base/Toggle'
-import { extractDobFromLicence } from './licenceServices'
+import { extractDobFromLicence, getYearsArray } from './licenceServices'
 import { licenceGroup } from './licenceGroup'
 
 class LicenceDates extends React.Component {
@@ -29,24 +29,24 @@ class LicenceDates extends React.Component {
 
   getDob = () => {
     let licence = this.props.getValue('drivers_licence_number')
-    return moment(extractDobFromLicence(licence))
+    return new Date(extractDobFromLicence(licence))
   }
 
   fetchDates = (date = null) => {
-
+    const { getValue, update } = this.props
 
     let group = new licenceGroup(
       this.getDob(), // dob
-      this.props.getValue('driver_training'), // driver training
-      this.props.getValue('out_of_province_history'), // oop
+      getValue('driver_training'), // driver training
+      getValue('out_of_province_history'), // oop
       this.state.tierInProgress, // tierInProgress
       date, // date just set
     )
 
     this.setState({ dates: group.allDates() }, () => {
-      group.t1() && this.props.update('t1_date', group.t1().format('YYYY-MM-DD'))
-      group.t2() && this.props.update('t2_date', group.t2().format('YYYY-MM-DD'))
-      group.t3() && this.props.update('t3_date', group.t3().format('YYYY-MM-DD'))
+      group.t1() && update('t1_date', format(group.t1(), 'YYYY-MM-DD'))
+      group.t2() && update('t2_date', format(group.t2(), 'YYYY-MM-DD'))
+      group.t3() && update('t3_date', format(group.t3(), 'YYYY-MM-DD'))
     })
 
   }
@@ -59,19 +59,41 @@ class LicenceDates extends React.Component {
   }
 
   renderDates = () => {
-    if (Object.keys(this.state.dates).length > 0) {
+    let { dates } = this.state
+    if (Object.keys(dates).length > 0) {
+
+      let yearArray = getYearsArray(dates)
+
       return (
         <div className="YearsContainer">
-          {Object.keys(this.state.dates).map((tier, i) =>
-            <LicenceDateButton
-              name={`${tier}_date`}
-              key={this.state.dates[tier].format('YYYY-MM-DD')}
-              date={this.state.dates[tier]}
-              licenceClass={tier}
-              licenceClick={this.licenceClick}
-              changeCallback={this.fetchDates}
-            />
-          )}
+          {yearArray.map((yr, i) => {
+            let props
+            if (yr === Number(format(dates.t1, 'YYYY'))) {
+              props = {
+                name: "t1_date", date: dates.t1, licenceClass: "t1"
+              }
+            } else if (yr === Number(format(dates.t2, 'YYYY'))) {
+              props = {
+                name: "t2_date", date: dates.t2, licenceClass: "t2"
+              }
+            } else if (yr === Number(format(dates.t3, 'YYYY'))) {
+              props = {
+                name: "t3_date", date: dates.t3, licenceClass: "t3"
+              }
+            } else {
+              props = {
+                yearOnly: yr,
+              }
+            }
+            return (
+              <LicenceDateButton
+                key={yr}
+                {...props}
+                licenceClick={this.licenceClick}
+                changeCallback={this.fetchDates}
+              />
+            )
+          })}
         </div>
       )
     } else {
@@ -93,8 +115,8 @@ class LicenceDates extends React.Component {
           <h4>Please set your {tierInProgress} licence</h4>
           <NewDate
             name={`${tierInProgress}_date`}
-            minDate={this.getDob().clone().add(16, 'years')}
-            maxDate={moment().startOf('day')}
+            minDate={addYears(this.getDob(), 16)}
+            maxDate={startOfDay(new Date())}
             showYear={true}
             displayDate={dates[tierInProgress]}
             changeCallback={this.fetchDates}
