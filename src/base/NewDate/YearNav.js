@@ -1,5 +1,5 @@
 import React from 'react'
-import { format } from 'date-fns'
+import { format, setYear } from 'date-fns'
 import { SelectChevron } from 'icons'
 
 class YearNav extends React.Component {
@@ -21,8 +21,8 @@ class YearNav extends React.Component {
   }
 
   yearChange = (e) => {
-    let nextDate = this.props.date.set('year', e.target.value)
-    this.props.setDate(nextDate)
+    let nextDate = setYear(this.props.date, e.target.value)
+    this.props.setDisplayDate(nextDate)
   }
 
   render() {

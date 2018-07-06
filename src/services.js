@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { isValid, isToday, subYears, isAfter, isBefore } from 'date-fns'
 
 export const labelToSlug = (label) => {
   if (label && !label.includes('-')) {
@@ -35,14 +35,13 @@ export const validPostalCode = (value) => {
 }
 
 export const validLicenceDate = (value) => {
-  if (moment(value, 'YYYY-MM-DD', true).isValid()) {
-    value = moment(value).startOf('day')
-    let today = moment().startOf('day')
-    let startOfTime = moment().subtract(100, 'years').startOf('day')
-    if (value.isSame(today) || value.isAfter(today)) {
+  if (isValid(value)) {
+    value = new Date(value)
+    let today = new Date()
+    if (isToday(value) || isAfter(value, today)) {
       return 'Must be before today'
     }
-    if (value.isBefore(startOfTime)) {
+    if (isBefore(value, subYears(today, 100))) {
       return 'Must be within the last 100 years'
     }
   }

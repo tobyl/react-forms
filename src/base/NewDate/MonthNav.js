@@ -1,24 +1,24 @@
 import React from 'react'
-import { format } from 'date-fns'
+import { format, addMonths, subMonths } from 'date-fns'
 import { Next, Previous } from 'icons'
 
 class MonthNav extends React.Component {
   prevClick = (e) => {
     e.preventDefault()
-    this.props.setDate(this.props.date.subtract(1, 'months'))
+    this.props.setDisplayDate(subMonths(this.props.date, 1))
   }
 
   nextClick = (e) => {
     e.preventDefault()
-    this.props.setDate(this.props.date.add(1, 'months'))
+    this.props.setDisplayDate(addMonths(this.props.date, 1))
   }
 
   render() {
-    const  { date } = this.props
+    const  { displayDate } = this.props
     return (
       <div className="MonthNav">
         <button className="Prev" onClick={this.prevClick}><Previous /></button>
-        {format(date, 'MMMM')}
+        {format(displayDate, 'MMMM')}
         <button className="Next" onClick={this.nextClick}><Next /></button>
       </div>
     )

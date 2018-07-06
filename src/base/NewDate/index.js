@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { format, isSameDay } from 'date-fns'
 import PropTypes from 'prop-types'
 import DatePicker from './DatePicker'
 import Field from '../Field'
@@ -10,31 +10,28 @@ import './style.css'
 
 class NewDate extends React.Component {
   state = {
-    displayDate: this.props.displayDate || moment(),
-    selectedDate: moment(),
+    displayDate: this.props.displayDate || new Date(),
+    selectedDate: this.props.selectedDate || new Date(),
   }
 
   componentDidUpdate() {
     if (this.props.value) {
-      const selected = this.state.selectedDate.format('YYYY-MM-DD')
-      const nextValue = moment(this.props.value).format('YYYY-MM-DD')
-      if (selected !== nextValue) {
-        this.setState({ selectedDate: moment(this.props.value) })
+      let nextDate = new Date(this.props.value)
+      if (!isSameDay(this.state.selectedDate, nextDate)) {
+        this.setState({ selectedDate: nextDate })
       }
     }
   }
 
   setDisplayDate = (value) => {
-    this.setState({ selectedDate: value })
+    this.setState({ displayDate: value })
   }
 
-  setDate = (value) => {
+  setSelectedDate = (value) => {
     let e = {
-      target: {
-        value: value.format('YYYY-MM-DD')
-      }
+      target: { value: format(value, 'YYYY-MM-DD') }
     }
-    this.setState({ date: value }, () =>
+    this.setState({ selectedDate: value }, () =>
       this.props.change(e)
     )
   }
@@ -42,26 +39,25 @@ class NewDate extends React.Component {
   render() {
     const { error, minDate, maxDate, showYear } = this.props
     const { displayDate, selectedDate } = this.state
-
     return (
       <div className="NewDate">
         {showYear &&
           <YearNav
-            date={displayDate}
-            setDate={this.setDisplayDate}
+            displayDate={displayDate}
+            setDisplayDate={this.setDisplayDate}
             minDate={minDate}
             maxDate={maxDate}
           />}
         <MonthNav
-          date={displayDate}
-          setDate={this.setDisplayDate}
+          displayDate={displayDate}
+          setDisplayDate={this.setDisplayDate}
           minDate={minDate}
           maxDate={maxDate}
         />
         <DatePicker
-          date={displayDate}
+          displayDate={displayDate}
           selectedDate={selectedDate}
-          setDate={this.setDate}
+          setSelectedDate={this.setSelectedDate}
           minDate={minDate}
           maxDate={maxDate}
         />

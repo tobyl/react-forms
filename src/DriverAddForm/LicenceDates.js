@@ -1,5 +1,5 @@
 import React from 'react'
-import { format, startOfDay, addYears } from 'date-fns'
+import { format, addYears } from 'date-fns'
 import Fieldset from 'base/Fieldset'
 import LicenceDateButton from 'base/LicenceDateButton'
 import NewDate from 'base/NewDate'
@@ -102,6 +102,7 @@ class LicenceDates extends React.Component {
   }
 
   render() {
+    let today = new Date()
     const { modalActive, tierInProgress, dates } = this.state
     return (
       <fieldset className="LicenceDates">
@@ -116,9 +117,10 @@ class LicenceDates extends React.Component {
           <NewDate
             name={`${tierInProgress}_date`}
             minDate={addYears(this.getDob(), 16)}
-            maxDate={startOfDay(new Date())}
+            maxDate={today}
             showYear={true}
             displayDate={dates[tierInProgress]}
+            selectedDate={dates[tierInProgress]}
             changeCallback={this.fetchDates}
           />
         </Modal>

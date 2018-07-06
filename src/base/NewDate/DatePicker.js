@@ -14,9 +14,9 @@ class DatePicker extends React.Component {
     return weeks
   }
 
-  getWeekDays = (wk) => {
-    let start = startOfISOWeek(setISOWeek(new Date(), wk))
-    let end = endOfISOWeek(setISOWeek(new Date(), wk))
+  getWeekDays = (wk, date) => {
+    let start = startOfISOWeek(setISOWeek(date, wk))
+    let end = endOfISOWeek(setISOWeek(date, wk))
     return eachDay(start, end)
   }
 
@@ -28,16 +28,18 @@ class DatePicker extends React.Component {
 
     return this.getWeeks(firstWeek, lastWeek).map(wk =>
       <tr key={wk}>
-        {this.getWeekDays(wk).map(day =>
+        {this.getWeekDays(wk, date).map(day => {
+          return (
             <Day
               key={format(day, 'DD')}
               date={day}
               selectedDate={this.props.selectedDate}
               minDate={this.props.minDate}
               maxDate={this.props.maxDate}
-              setDate={this.props.setDate}
+              setSelectedDate={this.props.setSelectedDate}
             />
-        )}
+          )
+        })}
       </tr>
     )
   }
@@ -52,7 +54,7 @@ class DatePicker extends React.Component {
                 <th key={d}><small>{d}</small></th>
               )}
             </tr>
-            {this.displayMonth(this.props.date)}
+            {this.displayMonth(this.props.displayDate)}
           </tbody>
         </table>
       </div>
