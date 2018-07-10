@@ -7,10 +7,15 @@ import Day from './Day'
 
 class DatePicker extends React.Component {
   getWeeks = (first, last) => {
+    console.log('got: ', first, last)
     let weeks = []
+
     for (let i = first; i < last + 1; i++) {
       weeks.push(i)
     }
+
+    console.log(weeks)
+
     return weeks
   }
 

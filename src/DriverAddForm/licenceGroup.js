@@ -1,4 +1,4 @@
-import { addYears } from 'date-fns'
+import { addYears, addMonths } from 'date-fns'
 
 export class licenceGroup {
   constructor(dob, training, oop, tierInProgress, date = null) {
@@ -25,14 +25,14 @@ export class licenceGroup {
     if (this.tierInProgress === 't2') {
       return this.date
     }
-    return addYears(this.t1(), 3)
+    return addMonths(this.t1(), 8)
   }
 
   t3 = () => {
     if (this.tierInProgress === 't3') {
       return this.date
     }
-    return addYears(this.t2(), 3)
+    return addYears(this.t2(), 1)
   }
 
   allDates = () => {

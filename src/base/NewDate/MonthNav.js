@@ -5,12 +5,12 @@ import { Next, Previous } from 'icons'
 class MonthNav extends React.Component {
   prevClick = (e) => {
     e.preventDefault()
-    this.props.setDisplayDate(subMonths(this.props.date, 1))
+    this.props.setDisplayDate(subMonths(this.props.displayDate, 1))
   }
 
   nextClick = (e) => {
     e.preventDefault()
-    this.props.setDisplayDate(addMonths(this.props.date, 1))
+    this.props.setDisplayDate(addMonths(this.props.displayDate, 1))
   }
 
   render() {

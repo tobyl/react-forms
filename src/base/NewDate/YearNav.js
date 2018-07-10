@@ -21,15 +21,15 @@ class YearNav extends React.Component {
   }
 
   yearChange = (e) => {
-    let nextDate = setYear(this.props.date, e.target.value)
+    let nextDate = setYear(this.props.displayDate, e.target.value)
     this.props.setDisplayDate(nextDate)
   }
 
   render() {
-    const  { date } = this.props
+    const  { displayDate } = this.props
     return (
       <div className="YearNav" style={{ position: 'relative' }}>
-        <select value={format(date, 'YYYY')} onChange={this.yearChange}>
+        <select value={format(displayDate, 'YYYY')} onChange={this.yearChange}>
           <option>Select…</option>
           {this.getYears().map(yr =>
             <option key={yr} value={yr}>{yr}</option>
