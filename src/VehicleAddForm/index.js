@@ -1,18 +1,13 @@
 import React from 'react'
 import Form from 'base/Form'
-import GetStarted from './GetStarted'
+import GetStarted from 'base/common/GetStarted'
 import VinLookup from './VinLookup'
 import PrincipalDriver from './PrincipalDriver'
 import VehicleDetails from './VehicleDetails'
 import VehicleUsage from './VehicleUsage'
 import VehicleEligibility from './VehicleEligibility'
 import ConfirmPage from 'base/ConfirmPage'
-
-const requesterName = [
-  ['01', 'John Doe'],
-  ['02', 'Jane Doe'],
-  ['03', 'Elizabeth Doe'],
-]
+import { requesterName } from 'helpers'
 
 class VehicleAddForm extends React.Component {
   render() {
@@ -24,9 +19,7 @@ class VehicleAddForm extends React.Component {
         <VehicleDetails />
         <VehicleUsage />
         <VehicleEligibility />
-        <ConfirmPage
-          drivers={requesterName}
-        />
+        <ConfirmPage drivers={requesterName} />
       </div>
     )
   }

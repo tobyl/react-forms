@@ -6,8 +6,10 @@ body {
   margin: 0;
   padding: 1rem;
   font-family: 'Roboto', sans-serif;
+  font-weight: 200;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
+  margin-top: 0;
   font-weight: 500;
 }

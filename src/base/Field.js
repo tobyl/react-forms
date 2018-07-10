@@ -69,7 +69,8 @@ const Field = (Component) => {
         'text': Component.name === 'Text' ||
                 Component.name === 'Select' ||
                 Component.name === 'PostalCode' ||
-                Component.name === 'Date'
+                Component.name === 'Date' ||
+                Component.name === 'NewDate'
       })
       return (
         <div className={classes}>

@@ -1,8 +1,10 @@
 import React from 'react'
+import { addDays } from 'date-fns'
 import Fieldset from 'base/Fieldset'
 import Toggle from 'base/Toggle'
 import Select from 'base/Select'
-import Date from 'base/Date'
+import Text from 'base/Text'
+import NewDate from 'base/NewDate'
 
 const policies = [
   ['0x000001', '0x000001'],
@@ -10,6 +12,15 @@ const policies = [
 ]
 
 class GetStarted extends React.Component {
+  state = { other: false }
+
+  toggleOtherField = () => {
+    let isOther = this.props.getValue('requester_name') === 'other'
+    this.setState({ other: isOther }, () =>
+      !isOther && this.props.destroy('requester_name_other')
+    )
+  }
+
   render() {
     return (
       <fieldset>
@@ -27,10 +38,18 @@ class GetStarted extends React.Component {
           name="requester_name"
           label="Who is requesting this change?"
           choices={this.props.drivers}
+          changeCallback={this.toggleOtherField}
         />
-        <Date
+        {this.state.other &&
+          <Text
+            name="requester_name_other"
+            label="Requester Name"
+          />}
+        <NewDate
           name="effective_date"
           label="Effective Date"
+          minDate={new Date()}
+          maxDate={addDays(new Date(), 30)}
         />
       </fieldset>
     )

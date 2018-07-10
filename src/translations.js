@@ -2,6 +2,7 @@ let consts = {
   // get started
   request_policies: 'Policies to include in this request',
   requester_name: 'Requester Name',
+  requester_name_other: 'Requester Name (other)',
   effective_date: 'Effective Date',
   // vin lookup
   vin_lookup: 'VIN Number',
@@ -23,7 +24,15 @@ let consts = {
   carry_special_use: 'Special use of vehicle',
   vehicle_modified: 'Vehicle has been modified',
   existing_damage: 'Vehicle has existing damage',
-  winter_tires: 'Vehicle has winter tires'
+  winter_tires: 'Vehicle has winter tires',
+  // driver details
+  first_name: 'Driver First Name',
+  last_name: 'Driver Last Name',
+  relationship_status: 'Relationship to Driver',
+  out_of_province_history: 'Out of Province History',
+  drivers_licence_number: 'Driver Licence Number',
+  marital_status: 'Marital Status',
+  authorization_status: 'Authorization Status',
 }
 
 export default consts

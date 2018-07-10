@@ -9,14 +9,9 @@ import './forms.css'
 export const formContext = React.createContext()
 
 const initialData = { // eslint-disable-line no-unused-vars
-  vehicle_driver: '02',
-  '0x0001': false,
-  '0x0002': true,
-  requester_name: '01',
-  effective_date: '2018-07-01',
-  vehicle_usage: 'commuting',
-  annual_kms: '121',
-  daily_kms: '21',
+  out_of_province_history: false,
+  drivers_licence_number: 'L12345678851207',
+  effective_date: '2017-12-12',
 }
 
 const Form = (Component) => {
@@ -24,7 +19,7 @@ const Form = (Component) => {
     constructor(props) {
       super(props)
       this.state = {
-        formData: {}, // initialData,
+        formData: initialData,
         errors: {},
       }
       this.routes = []
@@ -42,7 +37,7 @@ const Form = (Component) => {
         if (value !== '' && value !== null && value !== undefined) {
           // on mount, first run, or empty value, don't clear error
           // should there be a check for touched?
-          console.log('clearing error for ', field)
+          // console.log('clearing error for ', field)
           this.clearError(field)
         }
       })
@@ -106,7 +101,7 @@ const Form = (Component) => {
             cleanField: this.cleanField,
           }}>
             <form>
-              <Route path="/vehicle-add/:formStep" render={(matchProps) =>
+              <Route path={`${this.props.match.path}/:formStep`} render={(matchProps) =>
                 <Component
                   formData={this.state.formData}
                   setRoute={this.setRoute}
