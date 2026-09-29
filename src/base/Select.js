@@ -46,4 +46,5 @@ Select.propTypes = {
   choices: PropTypes.array.isRequired,
 }
 
-export default Field(Select)
+Select.displayName = 'Select'
+export default Field(Select, 'Select')

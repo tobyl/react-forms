@@ -3,10 +3,12 @@ import { Route } from 'react-router-dom'
 import { formContext } from './Form'
 import { labelToSlug } from 'services'
 
-const Fieldset = (Component) => {
+const Fieldset = (Component, defaultName) => {
+  const componentName = defaultName || Component.displayName || Component.name
+
   class WrappedFieldset extends React.Component {
     renderFieldset = (matchProps) => {
-      let fsName = this.props.fieldsetName || Component.name
+      let fsName = this.props.fieldsetName || componentName
       this.props.setRoute(labelToSlug(fsName))
       if (matchProps.match.params.formStep === labelToSlug(fsName)) {
         return (

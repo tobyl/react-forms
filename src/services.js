@@ -1,14 +1,16 @@
 import { isValid, isToday, subYears, isAfter, isBefore } from 'date-fns'
 
 export const labelToSlug = (label) => {
-  if (label && !label.includes('-')) {
+  if (!label || typeof label !== 'string') {
+    return ''
+  }
+  if (!label.includes('-')) {
     if (label.match(/[0-9]+/g)) {
       return label.toLowerCase()
     }
-    label = label.match(/[A-Z][a-z]+/g)
-    if (label && label.length > 0) {
-      label = label.join('-')
-      return label.toLowerCase()
+    const parts = label.match(/[A-Z][a-z]+/g)
+    if (parts && parts.length > 0) {
+      return parts.join('-').toLowerCase()
     }
   }
   return label.toLowerCase()

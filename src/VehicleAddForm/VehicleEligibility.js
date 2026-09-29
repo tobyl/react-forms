@@ -31,4 +31,5 @@ class VehicleEligibility extends React.Component {
   }
 }
 
-export default Fieldset(VehicleEligibility)
+VehicleEligibility.displayName = 'VehicleEligibility'
+export default Fieldset(VehicleEligibility, 'VehicleEligibility')

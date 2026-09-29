@@ -24,4 +24,5 @@ class ConfirmPage extends React.Component {
   }
 }
 
-export default Fieldset(ConfirmPage)
+ConfirmPage.displayName = 'ConfirmPage'
+export default Fieldset(ConfirmPage, 'ConfirmPage')

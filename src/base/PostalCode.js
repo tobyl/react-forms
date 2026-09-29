@@ -34,4 +34,5 @@ PostalCode.propTypes = {
   change: PropTypes.func.isRequired,
 }
 
-export default Field(PostalCode)
+PostalCode.displayName = 'PostalCode'
+export default Field(PostalCode, 'PostalCode')

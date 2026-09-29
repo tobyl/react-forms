@@ -129,4 +129,5 @@ class LicenceDates extends React.Component {
   }
 }
 
-export default Fieldset(LicenceDates)
+LicenceDates.displayName = 'LicenceDates'
+export default Fieldset(LicenceDates, 'LicenceDates')

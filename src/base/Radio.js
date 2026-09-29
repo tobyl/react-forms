@@ -66,4 +66,5 @@ Radio.propTypes = {
   choices: PropTypes.array.isRequired,
 }
 
-export default Field(Radio)
+Radio.displayName = 'Radio'
+export default Field(Radio, 'Radio')

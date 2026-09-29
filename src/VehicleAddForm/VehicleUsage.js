@@ -80,4 +80,5 @@ class VehicleUsage extends React.Component {
   }
 }
 
-export default Fieldset(VehicleUsage)
+VehicleUsage.displayName = 'VehicleUsage'
+export default Fieldset(VehicleUsage, 'VehicleUsage')

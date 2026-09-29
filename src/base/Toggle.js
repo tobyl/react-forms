@@ -52,4 +52,5 @@ Toggle.propTypes = {
   change: PropTypes.func.isRequired,
 }
 
-export default Field(Toggle)
+Toggle.displayName = 'Toggle'
+export default Field(Toggle, 'Toggle')

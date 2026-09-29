@@ -58,4 +58,5 @@ class DriverDetails extends React.Component {
   }
 }
 
-export default Fieldset(DriverDetails)
+DriverDetails.displayName = 'DriverDetails'
+export default Fieldset(DriverDetails, 'DriverDetails')

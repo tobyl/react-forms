@@ -34,7 +34,7 @@ class FormNav extends React.Component {
   nextClick = (e) => {
     e.preventDefault()
     this.setState({ submitting: true })
-    fetch('http://localhost:3001/errors')
+    fetch('/api/errors.json')
       .then(response => response.json())
       .then(response => new Promise(resolve =>
         setTimeout(() => resolve(response), 2000))

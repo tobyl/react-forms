@@ -4,7 +4,8 @@ import { formContext } from './Form'
 
 import './field.css'
 
-const Field = (Component) => {
+const Field = (Component, defaultName) => {
+  const compName = defaultName || Component.displayName || Component.name
   class WrappedField extends React.Component {
 
     state = {
@@ -66,11 +67,11 @@ const Field = (Component) => {
       let classes = classNames('field', {
         'toggle': this.props.toggleLabel,
         'active': this.state.active,
-        'text': Component.name === 'Text' ||
-                Component.name === 'Select' ||
-                Component.name === 'PostalCode' ||
-                Component.name === 'Date' ||
-                Component.name === 'NewDate'
+        'text': compName === 'Text' ||
+                compName === 'Select' ||
+                compName === 'PostalCode' ||
+                compName === 'Date' ||
+                compName === 'NewDate'
       })
       return (
         <div className={classes}>

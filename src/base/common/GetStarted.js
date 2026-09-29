@@ -56,4 +56,5 @@ class GetStarted extends React.Component {
   }
 }
 
-export default Fieldset(GetStarted)
+GetStarted.displayName = 'GetStarted'
+export default Fieldset(GetStarted, 'GetStarted')

@@ -21,4 +21,5 @@ class PrincipalDriver extends React.Component {
   }
 }
 
-export default Fieldset(PrincipalDriver)
+PrincipalDriver.displayName = 'PrincipalDriver'
+export default Fieldset(PrincipalDriver, 'PrincipalDriver')

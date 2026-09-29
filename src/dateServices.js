@@ -1,7 +1,7 @@
 import { isValid, isToday, isAfter, isBefore } from 'date-fns'
 
 export const validDate = (value) => {
-  return isValid(date)
+  return isValid(value)
 }
 
 export const afterToday = (date) => {

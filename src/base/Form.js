@@ -31,7 +31,7 @@ const Form = (Component) => {
     }
 
     update = (field, value) => {
-      let formData = Object.assign(this.state.formData, {})
+      let formData = Object.assign({}, this.state.formData)
       formData[field] = value
       this.setState({ formData }, () => {
         if (value !== '' && value !== null && value !== undefined) {
@@ -56,18 +56,18 @@ const Form = (Component) => {
     }
 
     setErrors = (errors) => {
-      let nextErrors = Object.assign(this.state.errors, errors)
+      let nextErrors = Object.assign({}, this.state.errors, errors)
       this.setState({ errors: nextErrors })
     }
 
     clearError = (field) => {
-      let nextErrors = Object.assign(this.state.errors, {})
+      let nextErrors = Object.assign({}, this.state.errors)
       delete nextErrors[field]
       this.setState({ errors: nextErrors })
     }
 
     destroy = (field) => {
-      let nextState = Object.assign(this.state.formData, {})
+      let nextState = Object.assign({}, this.state.formData)
       if (field.constructor === Array) {
         field.forEach(f =>
           delete nextState[f]

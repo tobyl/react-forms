@@ -27,4 +27,5 @@ Text.propTypes = {
   change: PropTypes.func.isRequired,
 }
 
-export default Field(Text)
+Text.displayName = 'Text'
+export default Field(Text, 'Text')

@@ -67,10 +67,11 @@ class NewDate extends React.Component {
   }
 }
 
-Date.propTypes = {
+NewDate.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   change: PropTypes.func.isRequired,
 }
 
-export default Field(NewDate)
+NewDate.displayName = 'NewDate'
+export default Field(NewDate, 'NewDate')

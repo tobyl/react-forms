@@ -16,7 +16,7 @@ class VinLookup extends React.Component {
     let vin = this.props.getValue('vin_lookup')
     if (isValidVin(vin)) {
       this.setState({ fetching: true })
-      fetch('http://localhost:3001/vehicle')
+      fetch('/api/vehicle.json')
         .then(response => response.json())
         .then(response => new Promise(resolve =>
           setTimeout(() => resolve(response), 2000))
@@ -58,4 +58,5 @@ class VinLookup extends React.Component {
   }
 }
 
-export default Fieldset(VinLookup)
+VinLookup.displayName = 'VinLookup'
+export default Fieldset(VinLookup, 'VinLookup')
